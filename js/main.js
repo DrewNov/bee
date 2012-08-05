@@ -5,4 +5,5 @@ window.onload = function (){
     console.log('hello word');
     //comment for testing of Git
     //second commit
+    //test push
 }
