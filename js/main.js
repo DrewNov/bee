@@ -1,9 +1,11 @@
 
-window.onload = function (){
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
-    console.log('hello word');
-    //comment for testing of Git
-    //second commit
-    //test push
-}
+$(document).ready(function(){
+    var gameHeight = 514;
+
+    var gameDOM  = $('.game');
+    gameDOM.css({'height': window.screen.availHeight-15+'px', 'width': window.screen.availWidth-15});
+
+    var metaTag = $('meta[name=viewport]')
+    metaTag.attr('content','initial-scale='+scale+', maximum-scale=1, minimum-scale=1')
+    console.log(metaTag);
+});
