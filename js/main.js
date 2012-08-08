@@ -5,12 +5,11 @@ $(document).bind("mobileinit", function(){
 $(document).ready(function(){
     bug = $('.bug');
     var gameDOM  = $('.game');
-    gameDOM.css({'height': window.screen.availHeight-15+'px', 'width': window.screen.width+'px'});
-
+    gameDOM.css({'height': window.screen.availHeight-15+'px', 'width': window.height+'px'});
     var metaTag = $('meta[name=viewport]')
     metaTag.attr('content','initial-scale=1, maximum-scale=1, minimum-scale=1')
 
-    console.log(metaTag);
+    var objectBug = new bug({idGameBlock:'gameBug'});
 
     var id_interval = 0;
 
