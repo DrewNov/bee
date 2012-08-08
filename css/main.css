@@ -1,11 +1,19 @@
+*{
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-transform:translate3d(0,0,0);
+    margin:0px;
+    -webkit-user-select: none;
 
+}
 
-.game { background: url("../img/bg.jpg") no-repeat center center; margin: 0 auto; background-size: auto 100%; position: relative;}
-.bug { background: url("../img/byg.png") no-repeat; position: absolute;  }
+.game { background: url("../img/bg.jpg") center center; margin: 0 auto; background-size: auto 100%; position: relative;}
+.bug { background: url("../img/bug.png") no-repeat; position: absolute; right: 0;
+    }
 
 .mainBar { position: absolute; border: 1px solid #000; }
 .subBarNormal {width: 50%; height: 100%; float: left;  }
 .subBarOverEat {width: 50%; height: 100%; float: right;  }
+
 
 /* #Media Queries
 ================================================== */

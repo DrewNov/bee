@@ -10,9 +10,6 @@ $(document).ready(function(){
 
     var objectBug = new bug({idGameBlock:'gameBug'});
 
-
-
-
 });
 
 
