@@ -1,4 +1,26 @@
 
+//Author: Shazia
+
+var Apple = function(cssClass)
+{
+    this.cssClass = cssClass;
+    this.state = 'Tree';
+    this.time = 0;
+    this.appleDom = '';
+
+    self = this;
+
+    this.init = function (){
+        self.appleDom = $('<div class ="yabloko"></div>');
+        self.appleDom.addClass(self.cssClass);
+        $('.game').append(self.appleDom);
+    }
+
+    this.init();
+}
+
+// Author: Shazia
+
 $(document).ready(
 
     function(){
@@ -11,14 +33,14 @@ $(document).ready(
         for (var i = 0; i < 30; i++)
         {
             // Generate random apple (Green, Red, Yellow)
-            appleFactory[i] = new Apple(cssClass[$.random(2)]);
+            appleFactory[i] = new Apple(cssClass[0]);
         }
 
         // Grab an Apple for animation, and let it go!
-        setTimeout(function(){
+        setInterval(function(){
             var appleInFall = appleFactory.shift();
 
-            appleInFall.animate({'top':'+=400'}, 400, function(){
+            appleInFall.appleDom.animate({'top':'+=400'}, 4000, function(){
                 // Fix fallen apple attributes
                 appleInFall.state = 'Ground';
 
@@ -28,17 +50,19 @@ $(document).ready(
             });
         },2000)
 
-        Author: Genia
+        //Author: Genia
         var apple_ground = new Array();//new array of apples,which are on the ground
 
-        function expire_apple(){ // apples are coming to the tree again
-            apple_ground.each(function() {
+        function expireApple(){ // apples are coming to the tree again
+            $.each(apple_ground,function() {
 
                 setTimeout(function(){
                     // this = (100,100, 'purple','Tree',0);
                     this.state= 'tree'; //again on tree
                     this.time= 0;  // clear time
-                    appleFactory.push(this)}, 2000);// return apple to the tree
+                    appleFactory.push(this);
+                    console.log(apple_ground)
+                }, 2000);// return apple to the tree
 
             });
         }
