@@ -28,8 +28,7 @@ $(document).ready(
             });
         },2000)
 
-
-
+        Author: Genia
         var apple_ground = new Array();//new array of apples,which are on the ground
 
         function expire_apple(){ // apples are coming to the tree again
@@ -43,7 +42,5 @@ $(document).ready(
 
             });
         }
-
-
     }
 );
