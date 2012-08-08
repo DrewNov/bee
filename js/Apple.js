@@ -6,14 +6,13 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var apple = function(setings)
+var Apple = function()
 {
-    this.param = setings;
+
 
     var posX = 100,
         posY = 100,
-        color = setings.color,
-        image = '',
+        cssClass = '',
         state = 'Tree',
         time = 0;
 
