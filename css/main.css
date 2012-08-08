@@ -1,7 +1,11 @@
 
 
 .game { background: url("../img/bg.jpg") no-repeat center center; margin: 0 auto; background-size: auto 100%; position: relative;}
-.bug { width: 40px; height: 40px; background: red; position: absolute; bottom: 10px; right: 0;   }
+.bug { background: url("../img/byg.png") no-repeat; position: absolute;  }
+
+.mainBar { position: absolute; border: 1px solid #000; }
+.subBarNormal {width: 50%; height: 100%; float: left;  }
+.subBarOverEat {width: 50%; height: 100%; float: right;  }
 
 /* #Media Queries
 ================================================== */
