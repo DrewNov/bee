@@ -60,8 +60,9 @@ $(document).ready(
                     // this = (100,100, 'purple','Tree',0);
                     this.state= 'tree'; //again on tree
                     this.time= 0;  // clear time
-                    appleFactory.push(this);
                     console.log(apple_ground)
+                    appleFactory.push(apple_ground.splice((apple_ground.length)-1,1));
+
                 }, 2000);// return apple to the tree
 
             });
