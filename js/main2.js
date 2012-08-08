@@ -2,19 +2,20 @@
 $(document).ready(
 
     function(){
+        // Initialize CSSClass Array
+        var cssClass = ["redApple", "greenApple", "yellowApple"];
+
         // Initialize the AppleFactory with 30 Apples
         var appleFactory = new Array();
 
         for (var i = 0; i < 30; i++)
         {
-            // Generate Random X, Y, and Color (and of course corresponding image file)
-            //var obj = new Apple();                                                                                                      );
-            appleFactory.push(obj);
+            // Generate random apple (Green, Red, Yellow)
+            appleFactory[i] = new Apple(cssClass[$.random(2)]);
         }
 
         // Grab an Apple for animation, and let it go!
-        for (var i = 0; i < 30; i++)
-        {
+        setTimeout(function(){
             var appleInFall = appleFactory.shift();
 
             appleInFall.animate({'top':'+=400'}, 400, function(){
@@ -25,7 +26,8 @@ $(document).ready(
                 apple_ground.push(appleInFall);
                 expireApple();
             });
-        }
+        },2000)
+
     }
 
     // On Load Start Falling Apples
