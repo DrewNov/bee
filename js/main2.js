@@ -46,10 +46,4 @@ $(document).ready(
 
 
     }
-
-
-
-    // On Load Start Falling Apples
-
-    //
 );
