@@ -11,12 +11,11 @@ var bug = function(setings)
 
     this.init = function()
     {
-        this.prepareBug();
-        this.addStatusBar();
-        this.decreaseWeight();
-
+        prepareBug();
+        addStatusBar();
+        decreaseWeight();
     }
-    this.decreaseWeight = function () {
+    decreaseWeight = function () {
         setInterval(function(){
             --self.weight;
             console.log(self.weight);
@@ -39,7 +38,7 @@ var bug = function(setings)
         }
 
     }
-    this.prepareBug = function (){
+    prepareBug = function (){
         var bugDiv = $('<div class="bug"></div>'),
             imgBugHeight = 49,
             imgBugWidth = 61,
@@ -50,7 +49,7 @@ var bug = function(setings)
         self.gameBlock.append(bugDiv) ;
 
     }
-    this.addStatusBar = function (){
+    addStatusBar = function (){
         var barBlock = $('<div class="mainBar"></div>'),
             subBarNormalBlock = $('<div class="subBarNormal"></div>'),
             subBarOverEatBlock = $('<div class="subBarOverEat"></div>'),
