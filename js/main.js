@@ -9,7 +9,6 @@ $(document).ready(function(){
     metaTag.attr('content','initial-scale=1, maximum-scale=1, minimum-scale=1')
 
     var objectBug = new bug({idGameBlock:'gameBug'});
-    bug = $('.bug');
     var id_interval = 0;
 
     gameDOM.bind('vmousedown',function(e){
