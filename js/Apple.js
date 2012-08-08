@@ -6,21 +6,16 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var Apple = function()
+var Apple = function(cssClass)
 {
-
-
-    var posX = 100,
-        posY = 100,
-        cssClass = '',
-        state = 'Tree',
-        time = 0;
-
+        this.cssClass = cssClass;
+        this.state = 'Tree';
+        this.time = 0;
         self = this;
 
     this.init = function (){
         appleDom = $(<div></div>);
-        appleDom.addClass(self.param.classApple);
+        appleDom.addClass(self.color.classApple);
         $('.game').append(appleDom);
     }
 

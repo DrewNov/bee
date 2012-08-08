@@ -13,8 +13,9 @@ function expire_apple(){ // apples are coming to the tree again
 
     setTimeout(function(){
        // this = (100,100, 'purple','Tree',0);
-        apple.state= 'tree';
-        appleFactory.push(this)}, 2000);
+        apple.state= 'tree'; //again on tree
+        apple.time= 0;  // clear time
+        appleFactory.push(this)}, 2000);// return apple to the tree
 
   });
 }
