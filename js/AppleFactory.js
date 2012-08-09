@@ -49,7 +49,10 @@ $(document).ready(
                 appleInFall.state = 'Ground';
 
                 // Add the fallen apple to groundedApple's array
+
+                //console.log(appleInFall);
                 apple_ground.push(appleInFall);
+               // console.log(apple_ground);
                 expireApple();
             });
         },2000)
@@ -58,18 +61,23 @@ $(document).ready(
         var apple_ground = new Array();//new array of apples,which are on the ground
 
         function expireApple(){ // apples are coming to the tree again
-            $.each(apple_ground,function() {
+           // $.each(apple_ground,function() {
 
                 setTimeout(function(){
-                    // this = (100,100, 'purple','Tree',0);
-                    this.state= 'tree'; //again on tree
-                    this.time= 0;  // clear time
+
+                    apple_ground.reverse();
+                    var lastApple = apple_ground.slice(0,1);
+                    console.log(lastApple);
+
+                    lastApple.state= 'tree'; //again on tree
+                    lastApple.time= 0;  // clear time
                     console.log(apple_ground)
-                    appleFactory.push(apple_ground.splice((apple_ground.length)-1,1));
+                    //appleFactory.push(apple_ground.splice((apple_ground.length)-2,apple_ground.length));
+                    apple_ground.reverse();
 
                 }, 2000);// return apple to the tree
 
-            });
+            //});
         }
     }
 );

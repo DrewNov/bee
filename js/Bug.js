@@ -68,14 +68,14 @@ var bug = function(setings)
             {
                 normalIndicator.css({'width':self.weight*self.scaleCof+'px', 'height':'100%','backgroundColor':'#73d216'});
                 overIndicator.css({'width':'0px' ,'height':'100%','backgroundColor':'#ffcc00'});
-                console.log('start animate normal status bar current width'+subBarNormalBlock.width()) ;
+               // console.log('start animate normal status bar current width'+subBarNormalBlock.width()) ;
 
             }
             else
             {
                 normalIndicator.css({'width':'100%', 'height':'100%','backgroundColor':'#73d216'});
                 overIndicator.css({'width':(self.weight*self.scaleCof - subBarNormalBlock.width())+'px','height':'100%','backgroundColor':'#ffcc00'});
-                console.log('start animate over status bar current width'+(self.weight*self.scaleCof - subBarNormalBlock.width())+'px') ;
+               // console.log('start animate over status bar current width'+(self.weight*self.scaleCof - subBarNormalBlock.width())+'px') ;
 
             }
 

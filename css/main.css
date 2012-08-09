@@ -1,18 +1,42 @@
-*{
+* {
     -webkit-user-select: none;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-    margin:0px;
-    -webkit-transform:translate3d(0,0,0);
-
+    margin: 0px;
+    -webkit-transform: translate3d(0, 0, 0);
 }
 
-.game { background: url("../img/bg.jpg") center center; margin: 0 auto; background-size: auto 100%; position: relative;}
-.bug { background: url("../img/bug.png") no-repeat; position: absolute; right: 0;
-    }
+.game {
+    background: url("../img/bg.jpg") center center;
+    margin: 0 auto;
+    background-size: auto 100%;
+    position: relative;
+}
 
-.mainBar { position: absolute; border: 1px solid #000; }
-.subBarNormal {width: 50%; height: 100%; float: left;  }
-.subBarOverEat {width: 50%; height: 100%; float: right;  }
+.bug {
+    background: url("../img/bug.png") no-repeat;
+    position: absolute;
+    left: 0;
+    /*-webkit-transition-property: left;*/
+    /*-webkit-transition-duration: 5ms;*/
+    /*-webkit-transition-timing-function: linear;*/
+}
+
+.mainBar {
+    position: absolute;
+    border: 1px solid #000;
+}
+
+.subBarNormal {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.subBarOverEat {
+    width: 50%;
+    height: 100%;
+    float: right;
+}
 
 .redApple {position: absolute; background: red; top: 400px; left: 500px; width: 30px; height: 30px}
 .greenApple {position: absolute; background: greenyellow; top: 400px; left: 500px; width: 30px; height: 30px}
@@ -29,7 +53,8 @@
 }
 
 /* All Mobile Sizes (devices and browser) */
-@media only screen and (max-width: 767px) {}
+@media only screen and (max-width: 767px) {
+}
 
 /* Mobile Sizes (devices and browser) */
 @media only screen and (min-width: 638px) and (max-width: 767px) {
