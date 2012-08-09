@@ -6,7 +6,6 @@ var Apple = function(cssClass)
     this.cssClass = cssClass;
     this.state = 'Tree';
     this.time = 0;
-
     this.appleDom = '';
 
     self = this;
@@ -44,7 +43,7 @@ $(document).ready(
         setInterval(function(){
             var appleInFall = appleFactory.shift();
 
-            appleInFall.appleDom.animate({'top':'+=300'}, 4000, function(){
+            appleInFall.appleDom.animate({'top':'+=400'}, 4000, function(){
                 // Fix fallen apple attributes
                 appleInFall.state = 'Ground';
 
