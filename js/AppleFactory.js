@@ -11,7 +11,7 @@ var Apple = function(cssClass)
     self = this;
 
     this.init = function (){
-        self.appleDom = $('<div class ="yabloko"></div>');
+        self.appleDom = $('<div class="apple"></div>');
         self.appleDom.addClass(self.cssClass);
         $('.game').append(self.appleDom);
     }
@@ -40,7 +40,7 @@ $(document).ready(
         setInterval(function(){
             var appleInFall = appleFactory.shift();
 
-            appleInFall.appleDom.animate({'top':'+=400'}, 4000, function(){
+            appleInFall.appleDom.animate({'top':'+=300'}, 4000, function(){
                 // Fix fallen apple attributes
                 appleInFall.state = 'Ground';
 

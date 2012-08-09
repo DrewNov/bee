@@ -14,6 +14,12 @@
 .subBarNormal {width: 50%; height: 100%; float: left;  }
 .subBarOverEat {width: 50%; height: 100%; float: right;  }
 
+.redApple {position: absolute; background: red; top: 400px; left: 500px; width: 30px; height: 30px}
+.greenApple {position: absolute; background: greenyellow; top: 400px; left: 500px; width: 30px; height: 30px}
+.yellowApple {position: absolute; background: yellow; top: 400px; left: 500px; width: 30px; height: 30px}
+
+
+
 /* #Media Queries
 ================================================== */
 
