@@ -38,9 +38,9 @@
     float: right;
 }
 
-.redApple {position: absolute; background: red; top: 300px; left: 500px; width: 30px; height: 30px; visibility:hidden}
-.greenApple {position: absolute; background: greenyellow; top: 300px; left: 500px; width: 30px; height: 30px; visibility:hidden}
-.yellowApple {position: absolute; background: yellow; top: 300px; left: 500px; width: 30px; height: 30px; visibility:hidden}
+.redApple {background-image: url(img/newsletter_headline2.gif); position: absolute; background: red; top: 300px; left: 500px; width: 30px; height: 30px; visibility:hidden}
+.greenApple {background-image: url(img/newsletter_headline2.gif); position: absolute; background: greenyellow; top: 300px; left: 500px; width: 30px; height: 30px; visibility:hidden}
+.yellowApple {background-image: url(img/newsletter_headline2.gif); position: absolute; background: yellow; top: 300px; left: 500px; width: 30px; height: 30px; visibility:hidden}
 
 
 

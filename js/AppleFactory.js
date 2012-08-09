@@ -65,18 +65,18 @@ $(document).ready(
            // $.each(apple_ground,function() {
 
                 setTimeout(function(){
-
                     apple_ground.reverse();
+
                     var lastApple = apple_ground.splice(0,1);
-                    console.log(lastApple[0]);
+
                     $(lastApple[0].appleDom).css({'top':'300px'});
                     lastApple[0].state= 'tree'; //again on tree
                     lastApple[0].time= 0;  // clear time
                     lastApple[0].appleDom.css({"visibility": "hidden"});
-                    console.log(apple_ground);
-                    appleFactory.push(lastApple[0]);
-                    apple_ground.reverse();
 
+                    appleFactory.push(lastApple[0]);
+
+                    apple_ground.reverse();
                 }, 2000);// return apple to the tree
 
             //});
