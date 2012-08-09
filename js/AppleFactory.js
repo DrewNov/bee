@@ -68,7 +68,7 @@ $(document).ready(
                     apple_ground.reverse();
                     var lastApple = apple_ground.splice(0,1);
                     console.log(lastApple[0]);
-                    $(lastApple[0].appleDom).css({'top':'100px'});
+                    $(lastApple[0].appleDom).css({'top':'300px'});
                     lastApple[0].state= 'tree'; //again on tree
                     lastApple[0].time= 0;  // clear time
                     console.log(apple_ground);
