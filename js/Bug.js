@@ -39,7 +39,7 @@ var bug = function(setings)
 
     }
     prepareBug = function (){
-        var bugDiv = $('<div class="bug"></div>'),
+        var bugDiv = $('<div class="bug" id="bug"></div>'),
             imgBugHeight = 49,
             imgBugWidth = 61,
             bottom = 29;

@@ -11,7 +11,7 @@ var Apple = function(cssClass)
     self = this;
 
     this.init = function (){
-        self.appleDom = $('<div class ="yabloko"></div>');
+        self.appleDom = $('<div class="apple"></div>');
         self.appleDom.addClass(self.cssClass);
         $('.game').append(self.appleDom);
     }
@@ -33,14 +33,18 @@ $(document).ready(
         for (var i = 0; i < 30; i++)
         {
             // Generate random apple (Green, Red, Yellow)
-            appleFactory[i] = new Apple(cssClass[0]);
+            appleFactory[i] = new Apple(cssClass[Math.floor(Math.random() * (3))]);
+            appleFactory[i].appleDom.css({
+                "left": Math.floor(Math.random() * (501)) + 350
+            });
+
         }
 
         // Grab an Apple for animation, and let it go!
         setInterval(function(){
             var appleInFall = appleFactory.shift();
 
-            appleInFall.appleDom.animate({'top':'+=400'}, 4000, function(){
+            appleInFall.appleDom.animate({'top':'+=300'}, 4000, function(){
                 // Fix fallen apple attributes
                 appleInFall.state = 'Ground';
 
