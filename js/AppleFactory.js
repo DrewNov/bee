@@ -71,6 +71,9 @@ $(document).ready(
 
             setTimeout(function(){
                     $(lastApple[0].appleDom).css({'top':'300px'});
+                    lastApple[0].appleDom.css({
+                        "background" : ""
+                    });
                     lastApple[0].state= 'tree'; //again on tree
                     lastApple[0].time= 0;  // clear time
                     lastApple[0].appleDom.css({"visibility": "hidden"});
