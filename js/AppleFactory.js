@@ -34,6 +34,10 @@ $(document).ready(
         {
             // Generate random apple (Green, Red, Yellow)
             appleFactory[i] = new Apple(cssClass[Math.floor(Math.random() * (3))]);
+            appleFactory[i].appleDom.css({
+                "left": Math.floor(Math.random() * (501)) + 350
+            });
+
         }
 
         // Grab an Apple for animation, and let it go!
