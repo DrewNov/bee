@@ -76,6 +76,7 @@ $(document).ready(
                     lastApple[0].appleDom.css({"visibility": "hidden"});
                 }, 3000);// return apple to the tree
 
+            appleFactory.push(lastApple[0]);
             apple_ground.reverse();
         }
     }
