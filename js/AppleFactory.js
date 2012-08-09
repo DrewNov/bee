@@ -62,24 +62,21 @@ $(document).ready(
         var apple_ground = new Array();//new array of apples,which are on the ground
 
         function expireApple(){ // apples are coming to the tree again
-           // $.each(apple_ground,function() {
+            apple_ground.reverse();
+            var lastApple = apple_ground.splice(0,1);
 
-                setTimeout(function(){
-                    apple_ground.reverse();
+            setTimeout(function(){
+                lastApple[0].appleDom.css({"background": "#db7093"});
+            }, 1000);
 
-                    var lastApple = apple_ground.splice(0,1);
-
+            setTimeout(function(){
                     $(lastApple[0].appleDom).css({'top':'300px'});
                     lastApple[0].state= 'tree'; //again on tree
                     lastApple[0].time= 0;  // clear time
                     lastApple[0].appleDom.css({"visibility": "hidden"});
+                }, 3000);// return apple to the tree
 
-                    appleFactory.push(lastApple[0]);
-
-                    apple_ground.reverse();
-                }, 2000);// return apple to the tree
-
-            //});
+            apple_ground.reverse();
         }
     }
 );
