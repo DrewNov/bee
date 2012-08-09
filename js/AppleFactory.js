@@ -61,7 +61,10 @@ $(document).ready(
                     this.state= 'tree'; //again on tree
                     this.time= 0;  // clear time
                     console.log(apple_ground)
-                    appleFactory.push(apple_ground.splice((apple_ground.length)-1,1));
+                   // appleFactory.push(apple_ground.splice((apple_ground.length)-1,1));
+                    appleFactory.push(apple_ground.splice((apple_ground.length),1));
+                    // appleFactory.push(apple_ground.splice(-1,1));
+
 
                 }, 2000);// return apple to the tree
 
