@@ -33,7 +33,7 @@ $(document).ready(
         for (var i = 0; i < 30; i++)
         {
             // Generate random apple (Green, Red, Yellow)
-            appleFactory[i] = new Apple(cssClass[0]);
+            appleFactory[i] = new Apple(cssClass[Math.floor(Math.random() * (3))]);
         }
 
         // Grab an Apple for animation, and let it go!
