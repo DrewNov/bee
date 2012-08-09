@@ -2,7 +2,10 @@
     -webkit-user-select: none;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     margin: 0px;
-    -webkit-transform: translate3d(0, 0, 0);
+    /*-webkit-transform: translate3d(0, 0, 0);*/
+    /*-webkit-transition: -webkit-transform .5 linear;*/
+    /*-webkit-backface-visibility: hidden;*/
+    /*-webkit-perspective: 1000;*/
 }
 
 .game {
@@ -12,10 +15,16 @@
     position: relative;
 }
 
+.apple{
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
 .bug {
     background: url("../img/bug.png") no-repeat;
     position: absolute;
     left: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    /*-webkit-transform:scaleX(-1);*/
     /*-webkit-transition-property: left;*/
     /*-webkit-transition-duration: 5ms;*/
     /*-webkit-transition-timing-function: linear;*/
