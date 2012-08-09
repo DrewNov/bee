@@ -6,6 +6,7 @@ var Apple = function(cssClass)
     this.cssClass = cssClass;
     this.state = 'Tree';
     this.time = 0;
+
     this.appleDom = '';
 
     self = this;
@@ -30,14 +31,13 @@ $(document).ready(
         // Initialize the AppleFactory with 30 Apples
         var appleFactory = new Array();
 
-        for (var i = 0; i < 30; i++)
+        for (var i=0; i<30; i++)
         {
             // Generate random apple (Green, Red, Yellow)
             appleFactory[i] = new Apple(cssClass[Math.floor(Math.random() * (3))]);
             appleFactory[i].appleDom.css({
                 "left": Math.floor(Math.random() * (501)) + 350
             });
-
         }
 
         // Grab an Apple for animation, and let it go!
