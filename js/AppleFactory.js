@@ -66,13 +66,13 @@ $(document).ready(
                 setTimeout(function(){
 
                     apple_ground.reverse();
-                    var lastApple = apple_ground.slice(0,1);
-                    console.log(lastApple);
-
-                    lastApple.state= 'tree'; //again on tree
-                    lastApple.time= 0;  // clear time
-                    console.log(apple_ground)
-                    //appleFactory.push(apple_ground.splice((apple_ground.length)-2,apple_ground.length));
+                    var lastApple = apple_ground.splice(0,1);
+                    console.log(lastApple[0]);
+                    $(lastApple[0].appleDom).css({'top':'100px'});
+                    lastApple[0].state= 'tree'; //again on tree
+                    lastApple[0].time= 0;  // clear time
+                    console.log(apple_ground);
+                    appleFactory.push(lastApple[0]);
                     apple_ground.reverse();
 
                 }, 2000);// return apple to the tree
