@@ -19,14 +19,14 @@ var bug = function(setings)
         prepareBug();
         addStatusBar();
         decreaseWeight();
-        self.posBottomTopY = parseInt(self.bugDom.css('bottom'))+49*self.scaleCof;
-        self.posBottomY = parseInt(self.bugDom.css('bottom'));
+        self.posBottomTopY = this.gameBlock.height() - parseInt(self.bugDom.css('bottom'))+49*self.scaleCof;
+        self.posBottomY = this.gameBlock.height() - parseInt(self.bugDom.css('bottom'));
         bugCheckColision();
 
     }
     var decreaseWeight = function () {
         setInterval(function(){
-           // console.log(self.weight);
+            // console.log(self.weight);
             --self.weight;
 //            console.log(self.weight);
         },1000);
@@ -80,14 +80,14 @@ var bug = function(setings)
             {
                 normalIndicator.css({'width':self.weight*self.scaleCof+'px', 'height':'100%','backgroundColor':'#73d216'});
                 overIndicator.css({'width':'0px' ,'height':'100%','backgroundColor':'#ffcc00'});
-               // console.log('start animate normal status bar current width'+subBarNormalBlock.width()) ;
+                // console.log('start animate normal status bar current width'+subBarNormalBlock.width()) ;
 
             }
             else
             {
                 normalIndicator.css({'width':'100%', 'height':'100%','backgroundColor':'#73d216'});
                 overIndicator.css({'width':(self.weight*self.scaleCof - subBarNormalBlock.width())+'px','height':'100%','backgroundColor':'#ffcc00'});
-               // console.log('start animate over status bar current width'+(self.weight*self.scaleCof - subBarNormalBlock.width())+'px') ;
+                // console.log('start animate over status bar current width'+(self.weight*self.scaleCof - subBarNormalBlock.width())+'px') ;
 
             }
 
@@ -99,23 +99,23 @@ var bug = function(setings)
             pixelPerMs = 0.5,
             time,
             curPos = self.bugDom.position().left;
-            if (e.screenX < halfWidth && curPos >= 0)
-            {
-                time = curPos/pixelPerMs;
-                self.bugDom.css({'-webkit-transition-duration': time+'ms','left':'1px'});
-                console.log('left', time, curPos, halfWidth, e.screenX);
-            }
-            else if (e.screenX >= halfWidth && gameBlockWidth >= curPos)
-            {
+        if (e.screenX < halfWidth && curPos >= 0)
+        {
+            time = curPos/pixelPerMs;
+            self.bugDom.css({'-webkit-transition-duration': time+'ms','left':'1px'});
+            console.log('left', time, curPos, halfWidth, e.screenX);
+        }
+        else if (e.screenX >= halfWidth && gameBlockWidth >= curPos)
+        {
 
-                time = (gameBlockWidth-curPos)/pixelPerMs;
-                console.log('right', time);
-                self.bugDom.css({'-webkit-transition-duration': time+'ms','left':(gameBlockWidth)+'px'});
+            time = (gameBlockWidth-curPos)/pixelPerMs;
+            console.log('right', time);
+            self.bugDom.css({'-webkit-transition-duration': time+'ms','left':(gameBlockWidth)+'px'});
 
-            }
-            else{
-                return false
-            }
+        }
+        else{
+            return false
+        }
 
     }
     this.bugStopMove = function (){
@@ -130,10 +130,13 @@ var bug = function(setings)
             if (globalFlyingApple.length>0)
             {
                 $.each(globalFlyingApple,function(){
-                    if((self.posBottomY <= this.appleDom.position().top+this.heightY <= self.posBottomTopY &&
-                        bugPosLeft <= this.posXright >= bugPosLeft+self.bugWidth) ||
-                        (self.posBottomY <= this.appleDom.position().top+this.heightY <= self.posBottomTopY &&
-                            bugPosLeft <= this.posXleft >= bugPosLeft+self.bugWidth)
+                    //console('self.posBottomY '+ self.posBottomY + 'this.appleDom.position().top+this.heightY' )
+                    if((self.posBottomY <= this.appleDom.position().top+this.heightY &&
+                        this.appleDom.position().top+this.heightY <= self.posBottomTopY &&
+                        bugPosLeft < this.posXright && this.posXright < bugPosLeft+self.bugWidth) ||
+                        (self.posBottomY < (this.appleDom.position().top+this.heightY) &&
+                            this.appleDom.position().top+this.heightY < self.posBottomTopY &&
+                            bugPosLeft < this.posXleft  && this.posXleft < bugPosLeft+self.bugWidth)
                         )
                     {
                         console.log('colisoin!!!!!!!!!!!')
