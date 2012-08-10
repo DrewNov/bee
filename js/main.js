@@ -4,17 +4,6 @@ $(document).bind("mobileinit", function(){
 
 $(document).ready(function(){
     var gameDOM  = $('.game');
-    var el = document.getElementById('gameBug')
-        , rfs = // for newer Webkit and Firefox
-            el.requestFullScreen
-                || el.webkitRequestFullScreen
-                || el.mozRequestFullScreen
-                || el.msRequestFullScreen
-        ;
-    if(typeof rfs!="undefined" && rfs){
-        rfs.call(el);
-    }
-
     var metaTag = $('meta[name=viewport]')
     var height = (window.innerHeight > 0) ? window.innerHeight : screen.height;
     var scaleCof = height/514;
