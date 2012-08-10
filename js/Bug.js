@@ -18,7 +18,7 @@ var bug = function(setings)
     decreaseWeight = function () {
         setInterval(function(){
             --self.weight;
-            console.log(self.weight);
+//            console.log(self.weight);
         },1000);
 
     }
