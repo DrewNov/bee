@@ -7,7 +7,7 @@ var Apple = function(cssClass)
     this.state = 'Tree';
     this.time = 0;
     this.appleDom = '';
-
+   // this.style.backgroundImagemage=url(img/green_f.png);
     self = this;
 
     this.init = function (){
@@ -33,6 +33,7 @@ $(document).ready(
         for (var i=0; i<30; i++)
         {
             // Generate random apple (Green, Red, Yellow)
+
             appleFactory[i] = new Apple(cssClass[Math.floor(Math.random() * (3))]);
             appleFactory[i].appleDom.css({
                 "left": Math.floor(Math.random() * (501)) + 350
@@ -43,7 +44,7 @@ $(document).ready(
         setInterval(function(){
             var appleInFall = appleFactory.shift();
 
-            appleInFall.appleDom.css({"visibility": "visible"});
+            appleInFall.appleDom.css({"visibility": "visible"},{});
 
             appleInFall.appleDom.animate({'top':'+=400'}, 4000, function(){
                 // Fix fallen apple attributes
@@ -66,7 +67,8 @@ $(document).ready(
             var lastApple = apple_ground.splice(0,1);
 
             setTimeout(function(){
-                lastApple[0].appleDom.css({"background": "#db7093"});
+                lastApple[0].appleDom.css({"background":'url("img/purple_red.png")'});
+                console.log('test back')
             }, 1000);
 
             setTimeout(function(){
