@@ -16,6 +16,8 @@
 }
 
 .apple{
+    /*background: url("../img/green_f.png") no-repeat;*/
+    /*position: absolute;*/
     -webkit-transform: translate3d(0, 0, 0);
 }
 
@@ -47,10 +49,10 @@
     float: right;
 }
 
-.redApple {background-image: url(img/newsletter_headline2.gif); position: absolute; background: red; top: 300px; left: 500px; width: 30px; height: 30px; visibility:hidden}
-.greenApple {background-image: url(img/newsletter_headline2.gif); position: absolute; background: greenyellow; top: 300px; left: 500px; width: 30px; height: 30px; visibility:hidden}
-.yellowApple {background-image: url(img/newsletter_headline2.gif); position: absolute; background: yellow; top: 300px; left: 500px; width: 30px; height: 30px; visibility:hidden}
-.purpleApple {background-image: url(img/newsletter_headline2.gif); position: absolute; background: #db7093; top: 300px; left: 500px; width: 30px; height: 30px; visibility:hidden}
+.redApple { position: absolute; background: url("../img/red_2.png"); top: 300px; left: 500px; width: 30px; height: 30px; visibility:hidden}
+.greenApple {position: absolute; background: url("../img/green_4.png"); top: 300px; left: 500px; width: 30px; height: 30px; visibility:hidden}
+.yellowApple {position: absolute; background:url("../img/yellow_2.png"); top: 300px; left: 500px; width: 30px; height: 30px; visibility:hidden}
+.purpleApple {position: absolute; background: url("../img/purple_2.png"); top: 300px; left: 500px; width: 30px; height: 30px; visibility:hidden}
 
 
 
