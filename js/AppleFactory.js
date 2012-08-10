@@ -67,7 +67,8 @@ $(document).ready(
             var lastApple = apple_ground.splice(0,1);
 
             setTimeout(function(){
-                lastApple[0].appleDom.css({"background": "#db7093"});
+                lastApple[0].appleDom.css({"background":'url("img/purple_2.png")'});
+                console.log('test back')
             }, 1000);
 
             setTimeout(function(){
