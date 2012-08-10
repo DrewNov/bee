@@ -6,18 +6,27 @@ var bug = function(setings)
     this.weight = 150;
     this.life = 3;
     this.gameBlock = $('#'+this.param.idGameBlock);
-    this.scaleCof = this.gameBlock.height()/413  ;
-    var self = this;
+    this.scaleCof = this.gameBlock.height()/514  ;
+    this.bugDom = '' ;
+    this.posBottomTopY = '' ;
+    this.posBottomY = '' ;
+    this.bugWidth = '';
+    var self = this,
+        gameBlockWidth = this.gameBlock.width();
 
     this.init = function()
     {
         prepareBug();
         addStatusBar();
         decreaseWeight();
+        self.posBottomTopY = parseInt(self.bugDom.css('bottom'))+49*self.scaleCof;
+        self.posBottomY = parseInt(self.bugDom.css('bottom'));
+        bugCheckColision();
+
     }
-    decreaseWeight = function () {
+    var decreaseWeight = function () {
         setInterval(function(){
-            console.log(self.weight);
+           // console.log(self.weight);
             --self.weight;
 //            console.log(self.weight);
         },1000);
@@ -39,7 +48,7 @@ var bug = function(setings)
         }
 
     }
-    prepareBug = function (){
+    var prepareBug = function (){
         var bugDiv = $('<div class="bug" id="bug"></div>'),
             imgBugHeight = 49,
             imgBugWidth = 61,
@@ -47,10 +56,12 @@ var bug = function(setings)
 
         $(bugDiv).css({'width':imgBugWidth*self.scaleCof+'px','height':imgBugHeight*self.scaleCof+'px', 'bottom':bottom*self.scaleCof+'px','right':'100px','backgroundSize':'cover'});
         console.log('bug add to game block');
+        self.bugWidth = parseInt(bugDiv.height());
         self.gameBlock.append(bugDiv) ;
+        self.bugDom = bugDiv;
 
     }
-    addStatusBar = function (){
+    var addStatusBar = function (){
         var barBlock = $('<div class="mainBar"></div>'),
             subBarNormalBlock = $('<div class="subBarNormal"></div>'),
             subBarOverEatBlock = $('<div class="subBarOverEat"></div>'),
@@ -83,5 +94,55 @@ var bug = function(setings)
 
         },1000);
     }
+    this.bugMove = function (e){
+        var halfWidth = window.screen.width/ 2,
+            pixelPerMs = 0.5,
+            time,
+            curPos = self.bugDom.position().left;
+            if (e.screenX < halfWidth && curPos >= 0)
+            {
+                time = curPos/pixelPerMs;
+                self.bugDom.css({'-webkit-transition-duration': time+'ms','left':'1px'});
+                console.log('left', time, curPos, halfWidth, e.screenX);
+            }
+            else if (e.screenX >= halfWidth && gameBlockWidth >= curPos)
+            {
+
+                time = (gameBlockWidth-curPos)/pixelPerMs;
+                console.log('right', time);
+                self.bugDom.css({'-webkit-transition-duration': time+'ms','left':(gameBlockWidth)+'px'});
+
+            }
+            else{
+                return false
+            }
+
+    }
+    this.bugStopMove = function (){
+        curPos = self.bugDom.position().left;
+        self.bugDom.css({'-webkit-transition-duration': '0s', 'left':curPos+'px'});
+    }
+
+    var bugCheckColision = function(){
+
+        setInterval(function(){
+            var bugPosLeft =  self.bugDom.position().left;
+            if (globalFlyingApple.length>0)
+            {
+                $.each(globalFlyingApple,function(){
+                    if((self.posBottomY <= this.appleDom.position().top+this.heightY <= self.posBottomTopY &&
+                        bugPosLeft <= this.posXright >= bugPosLeft+self.bugWidth) ||
+                        (self.posBottomY <= this.appleDom.position().top+this.heightY <= self.posBottomTopY &&
+                            bugPosLeft <= this.posXleft >= bugPosLeft+self.bugWidth)
+                        )
+                    {
+                        console.log('colisoin!!!!!!!!!!!')
+
+                    }
+                });
+            }
+        },0);
+    }
+
     this.init();
 }
