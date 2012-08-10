@@ -31,10 +31,28 @@ $(document).ready(function(){
     gameDOM.bind('vmousedown',function(e){
         console.log('---START');
         clearInterval(id_interval);
-        id_interval = setInterval(function(){moveBug(e)}, 0);
+        id_interval = setInterval(function(){moveBug(e)}, time_interval);
     });
 
-    gameDOM.bind('vmouseup',function(){
+    gameDOM.bind('vmouseup',function(e){
+        clearInterval(id_interval);
+        console.log('---STOP');
+    });
+
+    //----------keyboard--------
+    $('*').bind('keydown',function(e){
+        console.log('---START');
+        var key = e.which;
+        var newE = {clientX: 0};
+
+        if (key == 37) {newE.clientX = -3000}
+        if (key == 39) {newE.clientX = 3000}
+
+        clearInterval(id_interval);
+        id_interval = setInterval(function(){moveBug(newE)}, time_interval);
+    });
+
+    $('*').bind('keyup',function(e){
         clearInterval(id_interval);
         console.log('---STOP');
     });

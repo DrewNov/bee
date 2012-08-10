@@ -19,7 +19,7 @@ var bug = function(setings)
         setInterval(function(){
             console.log(self.weight);
             --self.weight;
-            console.log(self.weight);
+//            console.log(self.weight);
         },1000);
 
     }
