@@ -4,30 +4,23 @@ $(document).bind("mobileinit", function(){
 
 $(document).ready(function(){
     var gameDOM  = $('.game');
-    var el = document.getElementById('gameBug')
-        , rfs = // for newer Webkit and Firefox
-            el.requestFullScreen
-                || el.webkitRequestFullScreen
-                || el.mozRequestFullScreen
-                || el.msRequestFullScreen
-        ;
-    if(typeof rfs!="undefined" && rfs){
-        rfs.call(el);
-    }
-
+    gameDOM.css({'height': window.screen.availHeight-15+'px', 'width': window.height+'px'});
     var metaTag = $('meta[name=viewport]')
-    var height = (window.innerHeight > 0) ? window.innerHeight : screen.height;
-    var scaleCof = height/514;
-    gameDOM.css({'height':height, 'width': 800*scaleCof});
-    console.log(gameDOM.height(),gameDOM.width());
-    metaTag.attr('content','height=device-height, maximum-scale=1,minimum-scale=1, initial-scale=1, user-scalable=no');
+    metaTag.attr('content','width=device-width, initial-scale=1.0, user-scalable=no')
+
+    var objectBug = new bug({idGameBlock:'gameBug'});
+    var id_interval = 0;
+    halfWidth = window.screen.width / 2;
+    stopWidth = gameDOM.width(); // - bugWidth;
+    bug = $('.bug');
+    turn = -1;
+    step = 5;
+    time_interval = 0;
+
     document.body.addEventListener('touchmove', function(event) {
         event.preventDefault();
     }, false);
 
-    var objectBug = new bug({idGameBlock:'gameBug'});
-    var id_interval = 0;
-    bug = $('.bug');
     gameDOM.bind('vmousedown',function(e){
         console.log('---START');
         clearInterval(id_interval);
