@@ -6,8 +6,8 @@ var bug = function(setings)
     this.weight = 150;
     this.life = 3;
     this.gameBlock = $('#'+this.param.idGameBlock);
-    this.scaleCof = this.gameBlock.height()/514  ;
-    self = this;
+    this.scaleCof = this.gameBlock.height()/413  ;
+    var self = this;
 
     this.init = function()
     {
@@ -17,6 +17,7 @@ var bug = function(setings)
     }
     decreaseWeight = function () {
         setInterval(function(){
+            console.log(self.weight);
             --self.weight;
             console.log(self.weight);
         },1000);
