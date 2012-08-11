@@ -56,7 +56,7 @@ var bug = function(setings)
 
         $(bugDiv).css({'width':imgBugWidth*self.scaleCof+'px','height':imgBugHeight*self.scaleCof+'px', 'bottom':bottom*self.scaleCof+'px','right':'100px','backgroundSize':'cover'});
         console.log('bug add to game block');
-        self.bugWidth = parseInt(bugDiv.height());
+        self.bugWidth = bugDiv.height();
         self.gameBlock.append(bugDiv) ;
         self.bugDom = bugDiv;
 
@@ -95,8 +95,8 @@ var bug = function(setings)
         },1000);
     }
     this.bugMove = function (e){
-        var halfWidth = window.screen.width/ 2,
-            pixelPerMs = 0.5,
+        var halfWidth = window.screen.width/ 2, // to do add parameter constructur
+            pixelPerMs = 0.5, // add to bog param
             time,
             curPos = self.bugDom.position().left;
         if (e.screenX < halfWidth && curPos >= 0)
@@ -107,19 +107,15 @@ var bug = function(setings)
         }
         else if (e.screenX >= halfWidth && gameBlockWidth >= curPos)
         {
-
             time = (gameBlockWidth-curPos)/pixelPerMs;
             console.log('right', time);
             self.bugDom.css({'-webkit-transition-duration': time+'ms','left':(gameBlockWidth)+'px','background':'url(img/bug_inv.png)'});
 
         }
-        else{
-            return false
-        }
 
     }
     this.bugStopMove = function (){
-        curPos = self.bugDom.position().left;
+        var curPos = self.bugDom.position().left;
         self.bugDom.css({'-webkit-transition-duration': '0s', 'left':curPos+'px'});
     }
 

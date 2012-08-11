@@ -18,14 +18,12 @@ $(document).ready(function(){
 
 
     gameDOM.bind('vmousedown',function(e){
-        console.log(e);
         objectBug.bugMove(e);
 
     });
 
     gameDOM.bind('vmouseup',function(e){
         objectBug.bugStopMove();
-        console.log('---STOP');
     });
 
     //----------keyboard--------
