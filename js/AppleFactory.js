@@ -14,24 +14,21 @@ $(document).ready(
         for (var i=0; i<30; i++)
         {
             // Generate random apple (Green, Red, Yellow)
-            globalGeneratedApple[i] = new Apple();
+            globalGeneratedApple[i] = new Apple(i);
 
         }
 
         // Grab an Apple for animation, and let it go!
         setInterval(function(){
-            var appleInFall = globalGeneratedApple.splice(0,1)[0];
+            var appleInFall = globalGeneratedApple.shift();
             globalFlyingApple.push(appleInFall);
-            //console.log('flyapple add '+ globalFlyingApple.length);
+            appleInFall.state = 'fly';
+            appleInFall.animateApple();
             appleInFall.appleDom.bind("webkitTransitionEnd",function(){
                 appleInFall.state = 'Ground';
-                globalFlyingApple.pop() ;
-                //console.log('flyapple remove '+ globalFlyingApple.length);
-                globalAppleOnGround.push(appleInFall);
-                //console.log('ground apple add '+ globalAppleOnGround);
+                globalAppleOnGround.push( globalFlyingApple.shift() );
                 appleInFall.appleExpire();
             });
-            appleInFall.animateApple();
 
         },2000)
 

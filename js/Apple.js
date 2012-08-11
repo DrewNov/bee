@@ -1,6 +1,6 @@
-var Apple = function(cssClass)
+var Apple = function(iteration)
 {
-    this.cssClass = cssClass;
+    this.appleId = iteration;
     this.state = 'Tree';
     this.time = 0;
     this.appleDom = '';
@@ -18,7 +18,6 @@ var Apple = function(cssClass)
     createApple = function(){
         var cssClass = ["redApple", "greenApple", "yellowApple"];
         self.appleDom = $('<div class="apple"></div>');
-        self.appleDom.addClass(self.cssClass);
         self.appleDom.addClass(cssClass[Math.floor(Math.random() * (3))]);
         self.appleDom.css({
             "left": Math.floor((Math.random()*(410*self.scaleCof))+self.scaleCof*179),
@@ -35,10 +34,7 @@ var Apple = function(cssClass)
     }
 
     this.animateApple = function (){
-
         self.appleDom.css({"visibility": "visible",'-webkit-transition-duration': '4s','top':(curPosTop+self.scaleCof*277)+'px'});
-
-
     }
 
     this.appleExpire = function(){
@@ -48,16 +44,13 @@ var Apple = function(cssClass)
         }, 1000);
 
         setTimeout(function(){
-            tempApple = globalAppleOnGround.pop();
-            globalGeneratedApple.push(tempApple);
-            self.appleDom.css({'top':'300px',"visibility": "hidden","background" : ""});
+            globalGeneratedApple.push(globalAppleOnGround.shift());
+            self.appleDom.css({'top':(self.scaleCof*212+"px")+'px','-webkit-transition-duration': '0s',"visibility": "hidden","background" : ""});
             self.state= 'tree'; //again on tree
             self.time= 0;
             self.appleDom.unbind("webkitTransitionEnd");
         }, 3000);// return apple to the tree
     }
-
-
 
     this.init();
 }

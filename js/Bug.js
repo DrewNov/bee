@@ -11,8 +11,10 @@ var bug = function(setings)
     this.posBottomTopY = '' ;
     this.posBottomY = '' ;
     this.bugWidth = '';
-    var self = this,
-        gameBlockWidth = this.gameBlock.width();
+    this.bugHeight = '';
+    var self = this;
+    var gameBlockWidth = this.gameBlock.width();
+    var gameBlockHeight = this.gameBlock.height();
 
     this.init = function()
     {
@@ -56,7 +58,8 @@ var bug = function(setings)
 
         $(bugDiv).css({'width':imgBugWidth*self.scaleCof+'px','height':imgBugHeight*self.scaleCof+'px', 'bottom':bottom*self.scaleCof+'px','right':'100px','backgroundSize':'cover'});
         console.log('bug add to game block');
-        self.bugWidth = bugDiv.height();
+        self.bugWidth = bugDiv.width();
+        self.bugHeight = bugDiv.height();
         self.gameBlock.append(bugDiv) ;
         self.bugDom = bugDiv;
 
@@ -121,25 +124,29 @@ var bug = function(setings)
 
     var bugCheckColision = function(){
         setInterval(function(){
-            var bugPosLeft =  self.bugDom.position().left;
+            var bugLeftX =  self.bugDom.position().left;
             if (globalFlyingApple.length>0) {
                 $.each(globalFlyingApple,function(){
+                    var appleY = gameBlockHeight - this.appleDom.position().top - this.heightY;
+//                    console.log(appleY, '   len', globalFlyingApple.length);
                     /*console('self.posBottomY '+ self.posBottomY + 'this.appleDom.position().top+this.heightY' )
                     if((self.posBottomY <= this.appleDom.position().top+this.heightY &&
                         this.appleDom.position().top+this.heightY <= self.posBottomTopY &&
-                        bugPosLeft < this.posXright && this.posXright < bugPosLeft+self.bugWidth) ||
+                        bugLeftX < this.posXright && this.posXright < bugLeftX+self.bugWidth) ||
                         (self.posBottomY < (this.appleDom.position().top+this.heightY) &&
                             this.appleDom.position().top+this.heightY < self.posBottomTopY &&
-                            bugPosLeft < this.posXleft  && this.posXleft < bugPosLeft+self.bugWidth)
+                            bugLeftX < this.posXleft  && this.posXleft < bugLeftX+self.bugWidth)
                         )
                     {
                         console.log('colisoin!!!!!!!!!!!')
                     }*/
 
-
+                    if (appleY <= self.posBottomTopY) {
+                        console.log('booom!');
+                    }
                 });
             }
-        },0);
+        },100);
     }
 
     this.init();
