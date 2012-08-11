@@ -102,14 +102,14 @@ var bug = function(setings)
         if (e.screenX < halfWidth && curPos >= 0)
         {
             time = curPos/pixelPerMs;
-            self.bugDom.css({'-webkit-transition-duration': time+'ms','left':'1px','background':'url(img/bug.png)'});
+            self.bugDom.css({'-webkit-transition-duration': time+'ms','left':'1px','background-image':'url(img/bug.png)'});
             console.log('left', time, curPos, halfWidth, e.screenX);
         }
         else if (e.screenX >= halfWidth && gameBlockWidth >= curPos)
         {
             time = (gameBlockWidth-curPos)/pixelPerMs;
             console.log('right', time);
-            self.bugDom.css({'-webkit-transition-duration': time+'ms','left':(gameBlockWidth)+'px','background':'url(img/bug_inv.png)'});
+            self.bugDom.css({'-webkit-transition-duration': time+'ms','left':(gameBlockWidth)+'px','background-image':'url(img/bug_inv.png)'});
 
         }
 
@@ -120,13 +120,11 @@ var bug = function(setings)
     }
 
     var bugCheckColision = function(){
-
         setInterval(function(){
             var bugPosLeft =  self.bugDom.position().left;
-            if (globalFlyingApple.length>0)
-            {
+            if (globalFlyingApple.length>0) {
                 $.each(globalFlyingApple,function(){
-                    //console('self.posBottomY '+ self.posBottomY + 'this.appleDom.position().top+this.heightY' )
+                    /*console('self.posBottomY '+ self.posBottomY + 'this.appleDom.position().top+this.heightY' )
                     if((self.posBottomY <= this.appleDom.position().top+this.heightY &&
                         this.appleDom.position().top+this.heightY <= self.posBottomTopY &&
                         bugPosLeft < this.posXright && this.posXright < bugPosLeft+self.bugWidth) ||
@@ -136,8 +134,9 @@ var bug = function(setings)
                         )
                     {
                         console.log('colisoin!!!!!!!!!!!')
+                    }*/
 
-                    }
+
                 });
             }
         },0);
