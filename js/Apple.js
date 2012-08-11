@@ -35,10 +35,7 @@ var Apple = function(cssClass)
     }
 
     this.animateApple = function (){
-
         self.appleDom.css({"visibility": "visible",'-webkit-transition-duration': '4s','top':(curPosTop+self.scaleCof*277)+'px'});
-
-
     }
 
     this.appleExpire = function(){
@@ -56,8 +53,6 @@ var Apple = function(cssClass)
             self.appleDom.unbind("webkitTransitionEnd");
         }, 3000);// return apple to the tree
     }
-
-
 
     this.init();
 }
