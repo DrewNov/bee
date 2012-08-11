@@ -102,7 +102,7 @@ var bug = function(setings)
         if (e.screenX < halfWidth && curPos >= 0)
         {
             time = curPos/pixelPerMs;
-            self.bugDom.css({'-webkit-transition-duration': time+'ms','left':'1px','background':'url(img/bug.png) no-repeat cover'});
+            self.bugDom.css({'-webkit-transition-duration': time+'ms','left':'1px','background':'url(img/bug.png)'});
             console.log('left', time, curPos, halfWidth, e.screenX);
         }
         else if (e.screenX >= halfWidth && gameBlockWidth >= curPos)
@@ -110,7 +110,7 @@ var bug = function(setings)
 
             time = (gameBlockWidth-curPos)/pixelPerMs;
             console.log('right', time);
-            self.bugDom.css({'-webkit-transition-duration': time+'ms','left':(gameBlockWidth)+'px','background':'url(img/bug_inv.png) no-repeat cover'});
+            self.bugDom.css({'-webkit-transition-duration': time+'ms','left':(gameBlockWidth)+'px','background':'url(img/bug_inv.png)'});
 
         }
         else{
