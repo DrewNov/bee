@@ -16,39 +16,47 @@ $(document).ready(function(){
 
     var objectBug = new bug({idGameBlock:'gameBug'});
 
-
     gameDOM.bind('vmousedown',function(e){
+        e.preventDefault();
         objectBug.bugMove(e);
 
     });
 
     gameDOM.bind('vmouseup',function(e){
+        e.preventDefault();
         objectBug.bugStopMove();
     });
 
-    gameDOM.append('<div id="test_div" style="position: absolute; right: 0; top: 0"></div>');
+    gameDOM.append('<div id="test1" style="position: absolute; right: 0; top: 0"></div>');
+    gameDOM.append('<div id="test2" style="position: absolute; right: 0; top: 20px"></div>');
     gameDOM.bind('vmousemove',function(e){
-//        console.log('X:', e.clientX,'   Y:', e.clientY);
-        $('#test_div').html('X:' + e.clientX + '   Y:' + e.clientY);
+        $('#test1').html('X:' + e.clientX + '   Y:' + e.clientY);
     });
 
     //----------keyboard--------
-//    $('*').bind('keydown',function(e){
+    var hold = false;
+
+    $('*').bind('keydown',function(e){
+        if ( hold == true ) { return false; }
+        hold = true;
+
 //        console.log('---START');
-//        var key = e.which;
-//        var newE = {clientX: 0};
-//
-//        if (key == 37) {newE.clientX = -3000}
-//        if (key == 39) {newE.clientX = 3000}
-//
-//        clearInterval(id_interval);
-//        id_interval = setInterval(function(){moveBug(newE)}, time_interval);
-//    });
-//
-//    $('*').bind('keyup',function(e){
-//        clearInterval(id_interval);
+        var key = e.which;
+        var newE = {screenX: 0};
+
+        if (key == 37 || key == 39) {
+            if (key == 37) {newE.screenX = -9000}
+            if (key == 39) {newE.screenX = 9000}
+
+            objectBug.bugMove(newE);
+        }
+    });
+
+    $('*').bind('keyup',function(e){
+        hold = false;
+        objectBug.bugStopMove();
 //        console.log('---STOP');
-//    });
+    });
 });
 
 

@@ -137,9 +137,11 @@ var bug = function(setings)
                         if (this.nearBug == false){
                             if (bugRightX >= this.posXleft && bugLeftX <= this.posXright){
                                 console.log('BOOOooooM!   ', appleY, '   ', self.posBottomTopY);
+                                $('#test2').html('BooM!   ' + appleY);
+                                //there is can be code when bug catch apple on the head
                             }
                         } else {
-                            //can be code when bug eating
+                            //there is can be code when bug eating
                         }
                         this.nearBug = true;
                     } else {
