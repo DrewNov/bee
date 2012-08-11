@@ -44,7 +44,7 @@ var Apple = function(cssClass)
     this.appleExpire = function(){
         var tempApple;
         setTimeout(function(){
-            self.appleDom.css({"background": 'url("img/purple_red.png")'});
+            self.appleDom.css({"background": 'url("img/purple_red.png")',"background-size" : 'cover'});
         }, 1000);
 
         setTimeout(function(){
