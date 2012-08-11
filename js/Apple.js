@@ -50,7 +50,7 @@ var Apple = function(cssClass)
         setTimeout(function(){
             tempApple = globalAppleOnGround.pop();
             globalGeneratedApple.push(tempApple);
-            self.appleDom.css({'top':'300px',"visibility": "hidden","background" : ""});
+            self.appleDom.css({'top':(300*self.scaleCof)+'px','-webkit-transition-duration': '0s',"visibility": "hidden","background" : ""});
             self.state= 'tree'; //again on tree
             self.time= 0;
             self.appleDom.unbind("webkitTransitionEnd");
