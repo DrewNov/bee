@@ -8,6 +8,7 @@ var Apple = function(iteration)
     this.posXright = '';
     this.posXleft = '';
     this.heightY ='';
+    this.nearBug = false;
 
     var self = this,
         curPosTop;
