@@ -26,6 +26,12 @@ $(document).ready(function(){
         objectBug.bugStopMove();
     });
 
+    gameDOM.append('<div id="test_div" style="position: absolute; right: 0; top: 0"></div>');
+    gameDOM.bind('vmousemove',function(e){
+//        console.log('X:', e.clientX,'   Y:', e.clientY);
+        $('#test_div').html('X:' + e.clientX + '   Y:' + e.clientY);
+    });
+
     //----------keyboard--------
 //    $('*').bind('keydown',function(e){
 //        console.log('---START');
