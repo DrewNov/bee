@@ -29,7 +29,10 @@ $(document).ready(
             $('#apple-'+appleInFall.appleId).bind("webkitTransitionEnd",function(){
                 console.log('transition - end')
                 appleInFall.state = 'Ground';
-                globalAppleOnGround.push(globalFlyingApple.shift());
+                if(globalFlyingApple.length>0)
+                {
+                    globalAppleOnGround.push(globalFlyingApple.shift());
+                }
                 appleInFall.appleExpire();
             });
 

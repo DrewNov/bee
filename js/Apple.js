@@ -4,7 +4,7 @@ var Apple = function(iteration)
     this.state = 'Tree';
     this.time = 0;
     this.appleDom = '';
-    this.scaleCof = $('#gameBug').height()/514;
+    this.scaleCof = ($('#gameBug').height()/514).toFixed(2);
     this.posXright = '';
     this.posXleft = '';
     this.heightY ='';
@@ -51,6 +51,10 @@ var Apple = function(iteration)
             self.time= 0;
             $('#apple-'+self.appleId).unbind("webkitTransitionEnd");
         }, 3000);// return apple to the tree
+    }
+    this.appleMeetBug = function() {
+
+        self.appleDom.css({'top':(self.scaleCof*212)+'px','-webkit-transition-duration': '0s',"visibility": "hidden","background" : ""});
     }
 
     this.init();

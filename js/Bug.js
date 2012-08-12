@@ -100,52 +100,74 @@ var bug = function(setings)
         var halfWidth = window.screen.width/ 2, // to do add parameter constructur
             pixelPerMs = 0.5, // add to bog param
             time,
-            curPos = self.bugDom.position().left;
-        if (e.screenX < halfWidth && curPos >= 0)
+            curPos = Math.round(self.bugDom.position().left);
+        if ((e.screenX < halfWidth && curPos >= 0))
         {
             time = curPos/pixelPerMs;
             self.bugDom.css({'-webkit-transition-duration': time+'ms','left':'1px','background-image':'url(img/bug.png)'});
-            //console.log('left', time, curPos, halfWidth, e.screenX);
+            console.log('left', time, curPos, halfWidth, e.screenX);
         }
-        else if (e.screenX >= halfWidth && gameBlockWidth >= curPos)
+        else if ((e.screenX >= halfWidth && gameBlockWidth >= curPos))
         {
             time = (gameBlockWidth-curPos)/pixelPerMs;
-            //console.log('right', time);
+            console.log('right', time);
+            self.bugDom.css({'-webkit-transition-duration': time+'ms','left':(gameBlockWidth)+'px','background-image':'url(img/bug_inv.png)'});
+
+        }
+
+    }
+    this.bugMoveAcc = function (e){
+        var pixelPerMs = 0.2, // add to bog param
+            time,
+            curPos = Math.round(self.bugDom.position().left);
+        if ((e.accY > 20 && curPos >= 0))
+        {
+            time = curPos/pixelPerMs;
+            self.bugDom.css({'-webkit-transition-duration': time+'ms','left':'1px','background-image':'url(img/bug.png)'});
+            console.log('left', time, curPos, halfWidth, e.screenX);
+        }
+        else if ((e.accY < 0 && gameBlockWidth >= curPos))
+        {
+            time = (gameBlockWidth-curPos)/pixelPerMs;
+            console.log('right', time);
             self.bugDom.css({'-webkit-transition-duration': time+'ms','left':(gameBlockWidth)+'px','background-image':'url(img/bug_inv.png)'});
 
         }
 
     }
     this.bugStopMove = function (){
-        var curPos = self.bugDom.position().left;
+        var curPos = Math.round(self.bugDom.position().left);
         self.bugDom.css({'-webkit-transition-duration': '0s', 'left':curPos+'px'});
     }
 
     var bugCheckColision = function(){
         setInterval(function(){
             if (globalFlyingApple.length>0) {
-                var bugLeftX =  self.bugDom.position().left;
+                var bugLeftX =  Math.round(self.bugDom.position().left);
                 var bugRightX = bugLeftX + self.bugWidth;
 
-                $.each(globalFlyingApple,function(){
+                $.each(globalFlyingApple,function(index, apple){
 //                    console.log(appleY, '   len', globalFlyingApple.length);
 //                    console.log('self.posBottomTopY '+ self.posBottomY);
 
-                    var appleY = this.appleDom.position().top + this.heightY;
+                    var appleY = Math.round(apple.appleDom.position().top) + apple.heightY;
 
                     if (appleY >= self.posBottomTopY) {
-                        if (this.nearBug == false){
-                            if (bugRightX >= this.posXleft && bugLeftX <= this.posXright){
+                        if (apple.nearBug == false){
+                            if (bugRightX >= apple.posXleft && bugLeftX <= apple.posXright){
                                 console.log('BOOOooooM!   ', appleY, '   ', self.posBottomTopY);
-                                $('#test2').html('BooM!   ' + appleY);
+                                //$('#test2').html('BooM!   ' + appleY);
+                                globalGeneratedApple.push(globalFlyingApple.splice(index,1)[0]);
+                                $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
+                                apple.appleMeetBug(true);
                                 //there is can be code when bug catch apple on the head
                             }
                         } else {
                             //there is can be code when bug eating
                         }
-                        this.nearBug = true;
+                        apple.nearBug = true;
                     } else {
-                        this.nearBug = false;
+                        apple.nearBug = false;
                     }
                 });
             }
