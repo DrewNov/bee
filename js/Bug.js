@@ -21,7 +21,7 @@ var bug = function(setings)
         prepareBug();
         addStatusBar();
         decreaseWeight();
-        self.posBottomTopY = this.gameBlock.height() - parseInt(self.bugDom.css('bottom'))+49*self.scaleCof;
+        self.posBottomTopY = this.gameBlock.height() - parseInt(self.bugDom.css('bottom')) - 49*self.scaleCof;
         self.posBottomY = this.gameBlock.height() - parseInt(self.bugDom.css('bottom'));
         bugCheckColision();
 
@@ -57,7 +57,6 @@ var bug = function(setings)
             bottom = 29;
 
         $(bugDiv).css({'width':imgBugWidth*self.scaleCof+'px','height':imgBugHeight*self.scaleCof+'px', 'bottom':bottom*self.scaleCof+'px','right':'100px','backgroundSize':'cover'});
-        console.log('bug add to game block');
         self.bugWidth = bugDiv.width();
         self.bugHeight = bugDiv.height();
         self.gameBlock.append(bugDiv) ;
@@ -106,12 +105,12 @@ var bug = function(setings)
         {
             time = curPos/pixelPerMs;
             self.bugDom.css({'-webkit-transition-duration': time+'ms','left':'1px','background-image':'url(img/bug.png)'});
-            console.log('left', time, curPos, halfWidth, e.screenX);
+            //console.log('left', time, curPos, halfWidth, e.screenX);
         }
         else if (e.screenX >= halfWidth && gameBlockWidth >= curPos)
         {
             time = (gameBlockWidth-curPos)/pixelPerMs;
-            console.log('right', time);
+            //console.log('right', time);
             self.bugDom.css({'-webkit-transition-duration': time+'ms','left':(gameBlockWidth)+'px','background-image':'url(img/bug_inv.png)'});
 
         }
@@ -124,29 +123,33 @@ var bug = function(setings)
 
     var bugCheckColision = function(){
         setInterval(function(){
-            var bugLeftX =  self.bugDom.position().left;
             if (globalFlyingApple.length>0) {
-                $.each(globalFlyingApple,function(){
-                    var appleY = gameBlockHeight - this.appleDom.position().top - this.heightY;
-                    //console.log(appleY, '   len', globalFlyingApple.length, ' array ', globalFlyingApple);
-                    /*console('self.posBottomY '+ self.posBottomY + 'this.appleDom.position().top+this.heightY' )
-                    if((self.posBottomY <= this.appleDom.position().top+this.heightY &&
-                        this.appleDom.position().top+this.heightY <= self.posBottomTopY &&
-                        bugLeftX < this.posXright && this.posXright < bugLeftX+self.bugWidth) ||
-                        (self.posBottomY < (this.appleDom.position().top+this.heightY) &&
-                            this.appleDom.position().top+this.heightY < self.posBottomTopY &&
-                            bugLeftX < this.posXleft  && this.posXleft < bugLeftX+self.bugWidth)
-                        )
-                    {
-                        console.log('colisoin!!!!!!!!!!!')
-                    }*/
+                var bugLeftX =  self.bugDom.position().left;
+                var bugRightX = bugLeftX + self.bugWidth;
 
-                    if (appleY <= self.posBottomTopY) {
-                       // console.log('booom!');
+                $.each(globalFlyingApple,function(){
+//                    console.log(appleY, '   len', globalFlyingApple.length);
+//                    console.log('self.posBottomTopY '+ self.posBottomY);
+
+                    var appleY = this.appleDom.position().top + this.heightY;
+
+                    if (appleY >= self.posBottomTopY) {
+                        if (this.nearBug == false){
+                            if (bugRightX >= this.posXleft && bugLeftX <= this.posXright){
+                                console.log('BOOOooooM!   ', appleY, '   ', self.posBottomTopY);
+                                $('#test2').html('BooM!   ' + appleY);
+                                //there is can be code when bug catch apple on the head
+                            }
+                        } else {
+                            //there is can be code when bug eating
+                        }
+                        this.nearBug = true;
+                    } else {
+                        this.nearBug = false;
                     }
                 });
             }
-        },4000);
+        },100);
     }
 
     this.init();
