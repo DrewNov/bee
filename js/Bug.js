@@ -128,7 +128,7 @@ var bug = function(setings)
             if (globalFlyingApple.length>0) {
                 $.each(globalFlyingApple,function(){
                     var appleY = gameBlockHeight - this.appleDom.position().top - this.heightY;
-//                    console.log(appleY, '   len', globalFlyingApple.length);
+                    //console.log(appleY, '   len', globalFlyingApple.length, ' array ', globalFlyingApple);
                     /*console('self.posBottomY '+ self.posBottomY + 'this.appleDom.position().top+this.heightY' )
                     if((self.posBottomY <= this.appleDom.position().top+this.heightY &&
                         this.appleDom.position().top+this.heightY <= self.posBottomTopY &&
@@ -142,11 +142,11 @@ var bug = function(setings)
                     }*/
 
                     if (appleY <= self.posBottomTopY) {
-                        console.log('booom!');
+                       // console.log('booom!');
                     }
                 });
             }
-        },100);
+        },4000);
     }
 
     this.init();

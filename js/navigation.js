@@ -1,3 +1,4 @@
+
 var moveBug = function (e) {
     var curX = e.clientX;
     var bugX = bug.position().left;

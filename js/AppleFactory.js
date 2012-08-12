@@ -1,9 +1,9 @@
 // Author: Shazia
 
 //create global array
-globalGeneratedApple = new Array();
-globalFlyingApple = new Array();
-globalAppleOnGround = new Array();
+window.globalGeneratedApple = new Array();
+window.globalFlyingApple = new Array();
+window.globalAppleOnGround = new Array();
 
 //end of globals var
 
@@ -14,19 +14,22 @@ $(document).ready(
         for (var i=0; i<30; i++)
         {
             // Generate random apple (Green, Red, Yellow)
-            globalGeneratedApple[i] = new Apple(i);
+            globalGeneratedApple.push(new Apple(i));
 
         }
-
+        console.log(window.globalGeneratedApple);
         // Grab an Apple for animation, and let it go!
         setInterval(function(){
+            console.log(globalGeneratedApple, globalFlyingApple, globalAppleOnGround);
             var appleInFall = globalGeneratedApple.shift();
+            //console.log('first element'+ globalGeneratedApple.slice(0,1)) ;
             globalFlyingApple.push(appleInFall);
-            appleInFall.state = 'fly';
+            //console.log('transition - start');
             appleInFall.animateApple();
-            appleInFall.appleDom.bind("webkitTransitionEnd",function(){
+            $('#apple-'+appleInFall.appleId).bind("webkitTransitionEnd",function(){
+                console.log('transition - end')
                 appleInFall.state = 'Ground';
-                globalAppleOnGround.push( globalFlyingApple.shift() );
+                globalAppleOnGround.push(globalFlyingApple.shift());
                 appleInFall.appleExpire();
             });
 

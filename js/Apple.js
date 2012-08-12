@@ -17,7 +17,7 @@ var Apple = function(iteration)
     }
     createApple = function(){
         var cssClass = ["redApple", "greenApple", "yellowApple"];
-        self.appleDom = $('<div class="apple"></div>');
+        self.appleDom = $('<div class="apple" id="apple-'+self.appleId+'"></div>');
         self.appleDom.addClass(cssClass[Math.floor(Math.random() * (3))]);
         self.appleDom.css({
             "left": Math.floor((Math.random()*(410*self.scaleCof))+self.scaleCof*179),
@@ -38,17 +38,17 @@ var Apple = function(iteration)
     }
 
     this.appleExpire = function(){
-        var tempApple;
+        //console.log(globalAppleOnGround);
         setTimeout(function(){
             self.appleDom.css({"background": 'url("img/purple_red.png")',"background-size" : 'cover'});
         }, 1000);
 
         setTimeout(function(){
             globalGeneratedApple.push(globalAppleOnGround.shift());
-            self.appleDom.css({'top':(self.scaleCof*212+"px")+'px','-webkit-transition-duration': '0s',"visibility": "hidden","background" : ""});
+            self.appleDom.css({'top':(self.scaleCof*212)+'px','-webkit-transition-duration': '0s',"visibility": "hidden","background" : ""});
             self.state= 'tree'; //again on tree
             self.time= 0;
-            self.appleDom.unbind("webkitTransitionEnd");
+            $('#apple-'+self.appleId).unbind("webkitTransitionEnd");
         }, 3000);// return apple to the tree
     }
 

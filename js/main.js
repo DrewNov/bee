@@ -25,6 +25,7 @@ $(document).ready(function(){
     gameDOM.bind('vmouseup',function(e){
         objectBug.bugStopMove();
     });
+    //console.log('main js'+window.globalGeneratedApple);
 
     //----------keyboard--------
 //    $('*').bind('keydown',function(e){
