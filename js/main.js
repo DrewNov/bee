@@ -8,6 +8,7 @@ $(document).ready(function(){
     audio.autobuffer = true;
     audio.load(); // force the audio to start loading...doesn't work in iOS
     audio.play();
+    console.log(audio);
 
     var track = this;
 
