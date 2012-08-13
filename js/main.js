@@ -10,11 +10,20 @@ $(document).ready(function(){
     gameDOM.css({'height':height, 'width': 800*scaleCof});
     metaTag.attr('content','height=device-height, maximum-scale=1,minimum-scale=1, initial-scale=1, user-scalable=no');
 
-    document.body.addEventListener('touchmove', function(event) {
-        event.preventDefault();
-    }, false);
-
     var objectBug = new bug({idGameBlock:'gameBug'});
+
+    //----------for-testing--------
+    gameDOM.append('<div id="test1" style="position: absolute; right: 0; top: 0"></div>');
+    gameDOM.append('<div id="test2" style="position: absolute; right: 0; top: 20px"></div>');
+    gameDOM.append('<div id="test3" style="position: absolute; right: 0; top: 40px"></div>');
+    gameDOM.bind('vmousemove',function(e){
+        $('#test1').html('X:' + e.offsetX + '   Y:' + e.offsetY);
+    });
+
+    //----------mouse--------
+    $('body').bind('touchmove',function(e){
+        e.preventDefault();
+    });
 
     $('body').bind('vmousedown',function(e){
         e.preventDefault();
@@ -25,14 +34,6 @@ $(document).ready(function(){
         e.preventDefault();
         objectBug.bugStopMove();
     });
-    //console.log('main js'+window.globalGeneratedApple);
-
-    gameDOM.append('<div id="test1" style="position: absolute; right: 0; top: 0"></div>');
-    gameDOM.append('<div id="test2" style="position: absolute; right: 0; top: 20px"></div>');
-    gameDOM.append('<div id="test3" style="position: absolute; right: 0; top: 40px"></div>');
-    gameDOM.bind('vmousemove',function(e){
-        $('#test1').html('X:' + e.offsetX + '   Y:' + e.offsetY);
-    });
 
     //----------keyboard--------
     var hold = false;
@@ -40,7 +41,7 @@ $(document).ready(function(){
     $('body').bind('keydown',function(e){
         if ( hold == true ) { return false; }
         hold = true;
-//        console.log('---START');
+        //console.log('---START');
         var key = e.which;
         var newE = {screenX: 0};
 
@@ -54,14 +55,14 @@ $(document).ready(function(){
     $('body').bind('keyup',function(e){
         hold = false;
         objectBug.bugStopMove();
-//        console.log('---STOP');
+        //console.log('---STOP');
     });
 
     //----------accelerometer--------
     $(window).bind('acc', function(e) {
         //console.log('wat');
         //console.log(e.originalEvent.beta);
-        console.log(e.accX);
+        console.log('accX', e.accX);
         objectBug.bugMoveAcc(e);
     });
 });

@@ -20,14 +20,14 @@ $(document).ready(
         console.log(window.globalGeneratedApple);
         // Grab an Apple for animation, and let it go!
         setInterval(function(){
-            console.log(globalGeneratedApple, globalFlyingApple, globalAppleOnGround);
+            //console.log(globalGeneratedApple, globalFlyingApple, globalAppleOnGround);
             var appleInFall = globalGeneratedApple.shift();
             //console.log('first element'+ globalGeneratedApple.slice(0,1)) ;
             globalFlyingApple.push(appleInFall);
             //console.log('transition - start');
             appleInFall.animateApple();
             $('#apple-'+appleInFall.appleId).bind("webkitTransitionEnd",function(){
-                console.log('transition - end')
+                //console.log('transition - end')
                 appleInFall.state = 'Ground';
                 if(globalFlyingApple.length>0)
                 {
