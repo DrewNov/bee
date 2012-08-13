@@ -58,16 +58,13 @@ $(document).ready(function(){
         objectBug.bugStopMove();
 //        console.log('---STOP');
     });
-    $(window).bind('acc', function(e) {
+/*    $(window).bind('acc', function(e) {
         //console.log('wat');
         //console.log(e.originalEvent.beta);
         console.log(e.accX);
         objectBug.bugMoveAcc(e);
 
-
-
-
-    });
+    });*/
 });
 
 
