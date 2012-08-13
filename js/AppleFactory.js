@@ -17,7 +17,7 @@ $(document).ready(
             globalGeneratedApple.push(new Apple(i));
 
         }
-        console.log(window.globalGeneratedApple);
+        //console.log(window.globalGeneratedApple);
         // Grab an Apple for animation, and let it go!
         setInterval(function(){
             //console.log(globalGeneratedApple, globalFlyingApple, globalAppleOnGround);
