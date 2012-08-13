@@ -2,9 +2,12 @@
 var bug = function(setings)
 {
     this.param = setings;
-    this.speed = 1;
+    this.halfWidth = window.screen.width/ 2;
+    this.pixelPerMs = 0.5;
     this.weight = 150;
+    this.eaten = 0;
     this.life = 3;
+    this.level = 1;
     this.gameBlock = $('#'+this.param.idGameBlock);
     this.scaleCof = this.gameBlock.height()/514  ;
     this.bugDom = '' ;
@@ -34,17 +37,46 @@ var bug = function(setings)
     }
 
     this.addWeight = function (bonus) {
-        self.weight = self.weight+bonus;
+        self.weight += bonus;
+        if (self.pixelPerMs >= 0.05) {
+            self.pixelPerMs -= 0.03;
+        }
+        console.log('Speed: ' + self.pixelPerMs);
+    }
+
+    this.increaseLevel = function () {
+        ++self.level;
+        $('#level').html('Level: ' + self.level);
+
+        if (self.level == 3) {
+            alert('Winner!!!');
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    this.increaseEaten = function () {
+        ++self.eaten;
+        $('#eaten').html('Eaten: ' + self.eaten);
+
+        if (self.eaten == 5) {
+            alert('Level 2 !');
+            self.increaseLevel();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     this.removeLife = function () {
         --self.life;
-        if (self.life > 0)
-        {
+        $('#lifes').html('Lifes: ' + self.life);
+
+        if (self.life > 0) {
             return true;
-        }
-        else
-        {
+        } else {
+            alert('Game over...');
             return false;
         }
     }
@@ -96,19 +128,18 @@ var bug = function(setings)
     }
 
     this.bugMove = function (e){
-        var halfWidth = window.screen.width/ 2, // to do add parameter constructur
-            pixelPerMs = 0.5, // add to bog param
-            time,
-            curPos = Math.round(self.bugDom.position().left);
-        if ((e.screenX < halfWidth && curPos >= 0))
+        var time;
+        var curPos = Math.round(self.bugDom.position().left);
+
+        if ((e.screenX < self.halfWidth && curPos >= 0))
         {
-            time = curPos/pixelPerMs;
+            time = curPos/self.pixelPerMs;
             self.bugDom.css({'-webkit-transform':'scaleX(1)','-webkit-transition-duration': time+'ms','left':'1px'});
             //self.bugDom.css({'background-image':'url(img/bug.png)','-webkit-transition-duration': time+'ms','left':'1px'});
         }
-        else if (e.screenX >= halfWidth && curPos <= gameBlockWidth - self.bugWidth)
+        else if (e.screenX >= self.halfWidth && curPos <= gameBlockWidth - self.bugWidth)
         {
-            time = (gameBlockWidth - self.bugWidth-curPos)/pixelPerMs;
+            time = (gameBlockWidth - self.bugWidth-curPos)/self.pixelPerMs;
             self.bugDom.css({'-webkit-transform':'scaleX(-1)','-webkit-transition-duration': time+'ms','left':(gameBlockWidth - self.bugWidth)+'px'});
             //self.bugDom.css({'background-image':'url(img/bug_inv.png)','-webkit-transition-duration': time+'ms','left':(gameBlockWidth - self.bugWidth)+'px'});
         }
@@ -157,6 +188,7 @@ var bug = function(setings)
                                 if (i != globalFlyingApple.length - 1) {i = i - 1}
                                 $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
                                 apple.appleMeetBug(true);
+                                self.removeLife();
                             }
                         } else {
                             if (bugRightX >= apple.posXleft && bugLeftX <= apple.posXright){
@@ -166,6 +198,8 @@ var bug = function(setings)
                                 if (i != globalFlyingApple.length - 1) {i = i - 1}
                                 $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
                                 apple.appleMeetBug(true);
+                                self.increaseEaten();
+                                self.addWeight(10);
                             }
                         }
                         apple.nearBug = true;

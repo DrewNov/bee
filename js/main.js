@@ -3,6 +3,23 @@ $(document).bind("mobileinit", function(){
 });
 
 $(document).ready(function(){
+    var audio = document.createElement('audio');
+    audio.src =("../media/fone.mp3");
+    audio.autobuffer = true;
+    audio.load(); // force the audio to start loading...doesn't work in iOS
+    audio.play();
+    console.log(audio);
+
+    var track = this;
+
+    var progress = function () {
+        audio.removeEventListener('progress', progress, false);
+        if (track.updateCallback !== null) track.updateCallback();
+    };
+
+    audio.addEventListener('progress', progress, false);
+    track.updateCallback = null;
+
     var gameDOM  = $('.game');
     var navDom = $('.nav');
     var metaTag = $('meta[name=viewport]')
@@ -17,12 +34,17 @@ $(document).ready(function(){
     var objectBug = new bug({idGameBlock:'gameBug'});
 
     //----------for-testing--------
-    gameDOM.append('<div id="test1" style="position: absolute; right: 0; top: 0"></div>');
-    gameDOM.append('<div id="test2" style="position: absolute; right: 0; top: 20px"></div>');
-    gameDOM.append('<div id="test3" style="position: absolute; right: 0; top: 40px"></div>');
+    gameDOM.append('<div id="test1" style="position: absolute; right: 0px; top: 0px"></div>');
+    gameDOM.append('<div id="test2" style="position: absolute; right: 0px; top: 20px"></div>');
+    gameDOM.append('<div id="test3" style="position: absolute; right: 0px; top: 40px"></div>');
     gameDOM.bind('vmousemove',function(e){
         $('#test1').html('X:' + e.offsetX + '   Y:' + e.offsetY);
     });
+
+    //----------score-bar--------
+    gameDOM.append('<div id="level" style="position: absolute; left: 0px; top: 20px">Level: 1</div>');
+    gameDOM.append('<div id="eaten" style="position: absolute; left: 0px; top: 40px">Eaten: 0</div>');
+    gameDOM.append('<div id="lifes" style="position: absolute; left: 0px; top: 60px">Lifes: 3</div>');
 
     //----------mouse--------
     $('body').bind('touchmove',function(e){
@@ -63,12 +85,11 @@ $(document).ready(function(){
     });
 
     //----------accelerometer--------
-/*    $(window).bind('acc', function(e) {
-        //console.log('wat');
-        //console.log(e.originalEvent.beta);
-        console.log('accX', e.accX);
-        objectBug.bugMoveAcc(e);
-    });*/
+//    $(window).bind('acc', function(e) {
+//        //console.log(e.originalEvent.beta);
+//        console.log('accX', e.accX);
+//        objectBug.bugMoveAcc(e);
+//    });
 });
 
 
