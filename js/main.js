@@ -59,12 +59,12 @@ $(document).ready(function(){
     });
 
     //----------accelerometer--------
-    $(window).bind('acc', function(e) {
+/*    $(window).bind('acc', function(e) {
         //console.log('wat');
         //console.log(e.originalEvent.beta);
         console.log('accX', e.accX);
         objectBug.bugMoveAcc(e);
-    });
+    });*/
 });
 
 
