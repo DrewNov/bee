@@ -4,10 +4,14 @@ $(document).bind("mobileinit", function(){
 
 $(document).ready(function(){
     var gameDOM  = $('.game');
+    var navDom = $('.nav');
     var metaTag = $('meta[name=viewport]')
     var height = (window.innerHeight > 0) ? window.innerHeight : screen.height;
+    var width =  (window.innerWidth > 0) ? window.innerWidth : screen.width;
     var scaleCof = height/514;
+
     gameDOM.css({'height':height, 'width': 800*scaleCof});
+    navDom.css({'height':height, 'width': ((width-800*scaleCof)/2)});
     metaTag.attr('content','height=device-height, maximum-scale=1,minimum-scale=1, initial-scale=1, user-scalable=no');
 
     var objectBug = new bug({idGameBlock:'gameBug'});
