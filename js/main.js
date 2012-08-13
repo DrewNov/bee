@@ -3,6 +3,23 @@ $(document).bind("mobileinit", function(){
 });
 
 $(document).ready(function(){
+    var audio = document.createElement('audio');
+    audio.src =("../media/fone.mp3");
+    audio.autobuffer = true;
+    audio.load(); // force the audio to start loading...doesn't work in iOS
+    audio.play();
+    console.log(audio);
+
+    var track = this;
+
+    var progress = function () {
+        audio.removeEventListener('progress', progress, false);
+        if (track.updateCallback !== null) track.updateCallback();
+    };
+
+    audio.addEventListener('progress', progress, false);
+    track.updateCallback = null;
+
     var gameDOM  = $('.game');
     var metaTag = $('meta[name=viewport]')
     var height = (window.innerHeight > 0) ? window.innerHeight : screen.height;
@@ -65,7 +82,6 @@ $(document).ready(function(){
 
     //----------accelerometer--------
 //    $(window).bind('acc', function(e) {
-//        //console.log('wat');
 //        //console.log(e.originalEvent.beta);
 //        console.log('accX', e.accX);
 //        objectBug.bugMoveAcc(e);
