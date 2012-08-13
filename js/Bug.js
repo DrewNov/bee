@@ -16,24 +16,23 @@ var bug = function(setings)
     var gameBlockWidth = this.gameBlock.width();
     var gameBlockHeight = this.gameBlock.height();
 
-    this.init = function()
-    {
+    this.init = function(){
         prepareBug();
         addStatusBar();
         decreaseWeight();
         self.posBottomTopY = this.gameBlock.height() - parseInt(self.bugDom.css('bottom')) - 49*self.scaleCof;
         self.posBottomY = this.gameBlock.height() - parseInt(self.bugDom.css('bottom'));
         bugCheckColision();
-
     }
+
     var decreaseWeight = function () {
         setInterval(function(){
-            // console.log(self.weight);
+            //console.log(self.weight);
             --self.weight;
-//            console.log(self.weight);
+            //console.log(self.weight);
         },1000);
-
     }
+
     this.addWeight = function (bonus) {
         self.weight = self.weight+bonus;
     }
@@ -48,13 +47,13 @@ var bug = function(setings)
         {
             return false;
         }
-
     }
+
     var prepareBug = function (){
-        var bugDiv = $('<div class="bug" id="bug"></div>'),
-            imgBugHeight = 49,
-            imgBugWidth = 61,
-            bottom = 29;
+        var bugDiv = $('<div class="bug" id="bug"></div>');
+        var imgBugHeight = 49;
+        var imgBugWidth = 61;
+        var bottom = 29;
 
         $(bugDiv).css({'width':imgBugWidth*self.scaleCof+'px','height':imgBugHeight*self.scaleCof+'px', 'bottom':bottom*self.scaleCof+'px','right':'100px','backgroundSize':'cover'});
         self.bugWidth = bugDiv.width();
@@ -63,39 +62,39 @@ var bug = function(setings)
         self.bugDom = bugDiv;
 
     }
+
     var addStatusBar = function (){
-        var barBlock = $('<div class="mainBar"></div>'),
-            subBarNormalBlock = $('<div class="subBarNormal"></div>'),
-            subBarOverEatBlock = $('<div class="subBarOverEat"></div>'),
-            normalIndicator = $('<div class="indicator"></div>'),
-            overIndicator = $('<div class="indicator"></div>'),
-            barWidth = 200,
-            barHeight = 14;
+        var barBlock = $('<div class="mainBar"></div>');
+        var subBarNormalBlock = $('<div class="subBarNormal"></div>');
+        var subBarOverEatBlock = $('<div class="subBarOverEat"></div>');
+        var normalIndicator = $('<div class="indicator"></div>');
+        var overIndicator = $('<div class="indicator"></div>');
+        var barWidth = 200;
+        var barHeight = 14;
+
         barBlock.css({'width':self.scaleCof*barWidth+'px','height':self.scaleCof*barHeight+'px'});
         subBarNormalBlock.append(normalIndicator);
         subBarOverEatBlock.append(overIndicator);
         barBlock.append(subBarNormalBlock);
         barBlock.append(subBarOverEatBlock);
         self.gameBlock.append(barBlock);
+
         setInterval(function(){
             if(subBarNormalBlock.width() > self.weight*self.scaleCof )
             {
                 normalIndicator.css({'width':self.weight*self.scaleCof+'px', 'height':'100%','backgroundColor':'#73d216'});
                 overIndicator.css({'width':'0px' ,'height':'100%','backgroundColor':'#ffcc00'});
                 // console.log('start animate normal status bar current width'+subBarNormalBlock.width()) ;
-
             }
             else
             {
                 normalIndicator.css({'width':'100%', 'height':'100%','backgroundColor':'#73d216'});
                 overIndicator.css({'width':(self.weight*self.scaleCof - subBarNormalBlock.width())+'px','height':'100%','backgroundColor':'#ffcc00'});
                 // console.log('start animate over status bar current width'+(self.weight*self.scaleCof - subBarNormalBlock.width())+'px') ;
-
             }
-
-
         },1000);
     }
+
     this.bugMove = function (e){
         var halfWidth = window.screen.width/ 2, // to do add parameter constructur
             pixelPerMs = 0.5, // add to bog param
@@ -104,18 +103,17 @@ var bug = function(setings)
         if ((e.screenX < halfWidth && curPos >= 0))
         {
             time = curPos/pixelPerMs;
-            self.bugDom.css({'-webkit-transition-duration': time+'ms','left':'1px','background-image':'url(img/bug.png)'});
-            console.log('left', time, curPos, halfWidth, e.screenX);
+            self.bugDom.css({'-webkit-transform':'scaleX(1)','-webkit-transition-duration': time+'ms','left':'1px'});
+            //self.bugDom.css({'background-image':'url(img/bug.png)','-webkit-transition-duration': time+'ms','left':'1px'});
         }
-        else if ((e.screenX >= halfWidth && gameBlockWidth >= curPos))
+        else if (e.screenX >= halfWidth && curPos <= gameBlockWidth - self.bugWidth)
         {
-            time = (gameBlockWidth-curPos)/pixelPerMs;
-            console.log('right', time);
-            self.bugDom.css({'-webkit-transition-duration': time+'ms','left':(gameBlockWidth)+'px','background-image':'url(img/bug_inv.png)'});
-
+            time = (gameBlockWidth - self.bugWidth-curPos)/pixelPerMs;
+            self.bugDom.css({'-webkit-transform':'scaleX(-1)','-webkit-transition-duration': time+'ms','left':(gameBlockWidth - self.bugWidth)+'px'});
+            //self.bugDom.css({'background-image':'url(img/bug_inv.png)','-webkit-transition-duration': time+'ms','left':(gameBlockWidth - self.bugWidth)+'px'});
         }
-
     }
+
     this.bugMoveAcc = function (e){
         var pixelPerMs = 0.2, // add to bog param
             time,
@@ -131,10 +129,9 @@ var bug = function(setings)
             time = (gameBlockWidth-curPos)/pixelPerMs;
             console.log('right', time);
             self.bugDom.css({'-webkit-transition-duration': time+'ms','left':(gameBlockWidth)+'px','background-image':'url(img/bug_inv.png)'});
-
         }
-
     }
+
     this.bugStopMove = function (){
         var curPos = Math.round(self.bugDom.position().left);
         self.bugDom.css({'-webkit-transition-duration': '0s', 'left':curPos+'px'});
@@ -147,23 +144,25 @@ var bug = function(setings)
                 var bugRightX = bugLeftX + self.bugWidth;
 
                 $.each(globalFlyingApple,function(index, apple){
-//                    console.log(appleY, '   len', globalFlyingApple.length);
-//                    console.log('self.posBottomTopY '+ self.posBottomY);
-
                     var appleY = Math.round(apple.appleDom.position().top) + apple.heightY;
 
                     if (appleY >= self.posBottomTopY) {
                         if (apple.nearBug == false){
                             if (bugRightX >= apple.posXleft && bugLeftX <= apple.posXright){
-                                console.log('BOOOooooM!   ', appleY, '   ', self.posBottomTopY);
-                                //$('#test2').html('BooM!   ' + appleY);
+                                $('#test2').html('KILL on X=' + apple.posXleft);   //KILL
+                                console.log('KILL');
                                 globalGeneratedApple.push(globalFlyingApple.splice(index,1)[0]);
                                 $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
                                 apple.appleMeetBug(true);
-                                //there is can be code when bug catch apple on the head
                             }
                         } else {
-                            //there is can be code when bug eating
+                            if (bugRightX >= this.posXleft && bugLeftX <= this.posXright){
+                                $('#test3').html('CATCH on X=' + this.posXleft);   //CATCH
+                                console.log('CATCH');
+                                globalGeneratedApple.push(globalFlyingApple.splice(index,1)[0]);
+                                $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
+                                apple.appleMeetBug(true);
+                            }
                         }
                         apple.nearBug = true;
                     } else {
@@ -171,7 +170,7 @@ var bug = function(setings)
                     }
                 });
             }
-        },100);
+        },0);
     }
 
     this.init();
