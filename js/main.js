@@ -62,10 +62,6 @@ $(document).ready(function(){
         $('#test1').html('X:' + e.offsetX + '   Y:' + e.offsetY);
     });
 
-    //----------score-bar--------
-    gameDOM.append('<div id="level" >Level: <span>1</span></div>');
-    gameDOM.append('<div id="eaten" >Eaten: <span>0</span></div>');
-    gameDOM.append('<div id="lifes" >Lifes: <span>3</span></div>');
 
     //----------mouse--------
     $('body').bind('touchmove',function(e){
