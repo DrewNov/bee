@@ -9,6 +9,7 @@ var Apple = function(iteration)
     this.posXleft = '';
     this.heightY ='';
     this.nearBug = false;
+    this.timerOn = true;
 
     var self = this,
         curPosTop;
@@ -41,19 +42,27 @@ var Apple = function(iteration)
     this.appleExpire = function(){
         //console.log(globalAppleOnGround);
         setTimeout(function(){
-            self.appleDom.css({"background": 'url("img/purple_red.png")',"background-size" : 'cover'});
-            self.state = 'bad';
+            if(self.timerOn)
+            {
+                self.appleDom.css({"background": 'url("img/purple_orange.png")',"background-size" : 'cover'});
+                self.state = 'bad';
+            }
         }, 1000);
 
         setTimeout(function(){
-            if(globalAppleOnGround.length>0)
+            if (self.timerOn)
             {
-                globalGeneratedApple.push(globalAppleOnGround.shift());
+                if(globalAppleOnGround.length>0)
+                {
+                    globalGeneratedApple.push(globalAppleOnGround.shift());
+                }
+                self.appleDom.css({'top':(self.scaleCof*212)+'px','-webkit-transition-duration': '0s',"visibility": "hidden","background" : ""});
+                self.state= 'tree'; //again on tree
+
             }
-            self.appleDom.css({'top':(self.scaleCof*212)+'px','-webkit-transition-duration': '0s',"visibility": "hidden","background" : ""});
-            self.state= 'tree'; //again on tree
-            self.time= 0;
+            self.state= 'tree';
             $('#apple-'+self.appleId).unbind("webkitTransitionEnd");
+            self.timerOn = true;
         }, 3000);// return apple to the tree
     }
     this.appleMeetBug = function(action,x, y) {

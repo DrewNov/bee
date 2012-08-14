@@ -227,12 +227,18 @@ var bug = function(setings)
                     var appleOnGround = globalAppleOnGround[j];
 
                     if (bugRightX >= appleOnGround.posXleft && bugLeftX <= appleOnGround.posXright){
+                        $('#test2').html('BAD on X=' + appleOnGround.posXleft);   //KILL
+                        globalGeneratedApple.push(globalAppleOnGround.splice(j,1)[0]);
+                        console.log(appleOnGround.state);
                         if (appleOnGround.state == 'bad') {
-                            $('#test2').html('BAD on X=' + appleOnGround.posXleft);   //KILL
-                            console.log('BAD');
+                            appleOnGround.appleMeetBug(false,appleOnGround.posXleft,100);
+                            self.removeLife();
+                            appleOnGround.timerOn = false;
                         } else {
-                            $('#test3').html('GROUND on X=' + appleOnGround.posXleft);   //CATCH
-                            console.log('GROUND');
+                            appleOnGround.appleMeetBug(true,appleOnGround.posXleft,100);
+                            self.increaseEaten();
+                            self.addWeight(10);
+                            appleOnGround.timerOn = false;
                         }
                     }
                 }

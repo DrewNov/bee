@@ -11,7 +11,7 @@ $(document).ready(
 
     function(){
         // Initialize CSSClass Array
-        for (var i=0; i<30; i++)
+        for (var i=0; i<10; i++)
         {
             // Generate random apple (Green, Red, Yellow)
             globalGeneratedApple.push(new Apple(i));
@@ -22,17 +22,12 @@ $(document).ready(
         setInterval(function(){
             //console.log(globalGeneratedApple, globalFlyingApple, globalAppleOnGround);
             var appleInFall = globalGeneratedApple.shift();
-            //console.log('first element'+ globalGeneratedApple.slice(0,1)) ;
             globalFlyingApple.push(appleInFall);
-            //console.log('transition - start');
             appleInFall.animateApple();
             $('#apple-'+appleInFall.appleId).bind("webkitTransitionEnd",function(){
-                //console.log('transition - end')
+                console.log('add apple to ground');
                 appleInFall.state = 'Ground';
-                if(globalFlyingApple.length>0)
-                {
-                    globalAppleOnGround.push(globalFlyingApple.shift());
-                }
+                globalAppleOnGround.push(globalFlyingApple.shift());
                 appleInFall.appleExpire();
             });
 
