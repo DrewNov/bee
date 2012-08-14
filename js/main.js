@@ -34,6 +34,19 @@ $(document).ready(function(){
     var objectBug = new bug({idGameBlock:'gameBug'});
 
     //----------for-testing--------
+    var pos = navigator.appVersion.toLowerCase().search('android') + 8;
+    var androidVersion = navigator.appVersion.substr(pos,3);
+    if (androidVersion == '2.2' || androidVersion == '2.3') {
+        objectBug.trans = '';
+        objectBug.bugDom.css({'-webkit-transform':'scaleX(-1)'});
+    } else {
+        objectBug.bugDom.css({
+            '-webkit-backface-visibility':'hidden',
+            '-webkit-perspective':'1000',
+            '-webkit-transform':'translate3d(0,0,0) scaleX(-1)'
+        });
+    }
+
     gameDOM.append('<div id="test1" style="position: absolute; right: 0px; top: 0px"></div>');
     gameDOM.append('<div id="test2" style="position: absolute; right: 0px; top: 20px"></div>');
     gameDOM.append('<div id="test3" style="position: absolute; right: 0px; top: 40px"></div>');

@@ -2,6 +2,7 @@
 var bug = function(setings)
 {
     this.param = setings;
+    this.trans = 'translate3d(0,0,0)';
     this.halfWidth = window.screen.width/ 2;
     this.pixelPerMs = 0.5;
     this.weight = 150;
@@ -134,13 +135,13 @@ var bug = function(setings)
         if ((e.screenX < self.halfWidth && curPos >= 0))
         {
             time = curPos/self.pixelPerMs;
-            self.bugDom.css({'-webkit-transform':'scaleX(1)','-webkit-transition-duration': time+'ms','left':'1px'});
+            self.bugDom.css({'-webkit-transform':self.trans+' scaleX(1)','-webkit-transition-duration': time+'ms','left':'1px'});
             //self.bugDom.css({'background-image':'url(img/bug.png)','-webkit-transition-duration': time+'ms','left':'1px'});
         }
         else if (e.screenX >= self.halfWidth && curPos <= gameBlockWidth - self.bugWidth)
         {
             time = (gameBlockWidth - self.bugWidth-curPos)/self.pixelPerMs;
-            self.bugDom.css({'-webkit-transform':'scaleX(-1)','-webkit-transition-duration': time+'ms','left':(gameBlockWidth - self.bugWidth)+'px'});
+            self.bugDom.css({'-webkit-transform':self.trans+' scaleX(-1)','-webkit-transition-duration': time+'ms','left':(gameBlockWidth - self.bugWidth)+'px'});
             //self.bugDom.css({'background-image':'url(img/bug_inv.png)','-webkit-transition-duration': time+'ms','left':(gameBlockWidth - self.bugWidth)+'px'});
         }
     }
