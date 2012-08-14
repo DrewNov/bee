@@ -9,6 +9,7 @@ $(document).ready(function(){
     audio.load(); // force the audio to start loading...doesn't work in iOS
     audio.play();
     audio.volume="0.1";
+    audio.loop=true;
     console.log(audio);
 
     var track = this;
