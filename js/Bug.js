@@ -54,7 +54,7 @@ var bug = function(setings)
         $('#level').html('Level: ' + self.level);
 
         if (self.level == 3) {
-            alert('Winner!!!');
+            //alert('Winner!!!');
             return true;
         } else {
             return false;
@@ -66,7 +66,7 @@ var bug = function(setings)
         $('#eaten').html('Eaten: ' + self.eaten);
 
         if (self.eaten == 5) {
-            alert('Level 2 !');
+            //alert('Level 2 !');
             self.increaseLevel();
             return true;
         } else {
@@ -81,7 +81,7 @@ var bug = function(setings)
         if (self.life > 0) {
             return true;
         } else {
-            alert('Game over...');
+            //alert('Game over...');
             return false;
         }
     }
@@ -194,13 +194,14 @@ var bug = function(setings)
                     var appleY = Math.round(apple.appleDom.position().top) + apple.heightY;
 
                     if (appleY >= self.posBottomTopY) {
+
                         if (apple.nearBug == false){
                             if (bugRightX >= apple.posXleft && bugLeftX <= apple.posXright){
                                 $('#test2').html('KILL on X=' + apple.posXleft);   //KILL
                                 console.log('KILL');
                                 globalGeneratedApple.push(globalFlyingApple.splice(i,1)[0]);
                                 if (i != globalFlyingApple.length - 1) {i = i - 1}
-                                $('#appleOnGround-'+apple.appleId).unbind("webkitTransitionEnd");
+                                $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
                                 apple.appleMeetBug(false,apple.posXleft,100);
                                 self.removeLife();
                             }
@@ -210,7 +211,7 @@ var bug = function(setings)
                                 console.log('CATCH');
                                 globalGeneratedApple.push(globalFlyingApple.splice(i,1)[0]);
                                 if (i != globalFlyingApple.length - 1) {i = i - 1}
-                                $('#appleOnGround-'+apple.appleId).unbind("webkitTransitionEnd");
+                                $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
                                 apple.appleMeetBug(true,apple.posXleft,100);
                                 self.increaseEaten();
                                 self.addWeight(10);
@@ -226,25 +227,29 @@ var bug = function(setings)
             if (globalAppleOnGround.length > 0) {
                 for (var j = 0; j < globalAppleOnGround.length; j++) {
                     var appleOnGround = globalAppleOnGround[j];
-
+                    console.log(globalAppleOnGround.length);
                     if (bugRightX >= appleOnGround.posXleft && bugLeftX <= appleOnGround.posXright){
                         $('#test2').html('BAD on X=' + appleOnGround.posXleft);   //KILL
-                        console.log('BAD');
-
+                        console.log(appleOnGround.state);
                         if (appleOnGround.state == 'bad') {
+                            appleOnGround.appleMeetBug(false,appleOnGround.posXleft,100);
+                            self.removeLife();
+                            appleOnGround.timerOn = false;
 
                         } else {
-
+                            appleOnGround.appleMeetBug(true,appleOnGround.posXleft,100);
+                            self.increaseEaten();
+                            self.addWeight(10);
+                            appleOnGround.timerOn = false;
                         }
-//                        globalGeneratedApple.push(globalFlyingApple.splice(i,1)[0]);
-//                        if (i != globalFlyingApple.length - 1) {i = i - 1}
-//                        $('#appleOnGround-'+appleOnGround.appleId).unbind("webkitTransitionEnd");
-//                        appleOnGround.appleMeetBug(false,appleOnGround.posXleft,100);
-//                        self.removeLife();
+                        globalGeneratedApple.push(globalAppleOnGround.splice(j,1)[0]);
                     }
                 }
             }
         },50);
+        setInterval(
+
+        );
     }
 
     this.init();
