@@ -42,11 +42,8 @@ var Apple = function(iteration)
     this.appleExpire = function(){
         //console.log(globalAppleOnGround);
         setTimeout(function(){
-            if(self.timerOn)
-            {
-                self.appleDom.css({"background": 'url("img/purple_red.png")',"background-size" : 'cover'});
-                self.state = 'bad';
-            }
+            self.appleDom.css({"background": 'url("img/purple_orange.png")',"background-size" : 'cover'});
+            self.state = 'bad';
         }, 1000);
 
         setTimeout(function(){
