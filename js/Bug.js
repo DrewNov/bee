@@ -54,7 +54,7 @@ var bug = function(setings)
         $('#level').html('Level: ' + self.level);
 
         if (self.level == 3) {
-            alert('Winner!!!');
+            //alert('Winner!!!');
             return true;
         } else {
             return false;
@@ -66,7 +66,7 @@ var bug = function(setings)
         $('#eaten').html('Eaten: ' + self.eaten);
 
         if (self.eaten == 5) {
-            alert('Level 2 !');
+            //alert('Level 2 !');
             self.increaseLevel();
             return true;
         } else {
@@ -81,7 +81,7 @@ var bug = function(setings)
         if (self.life > 0) {
             return true;
         } else {
-            alert('Game over...');
+            //alert('Game over...');
             return false;
         }
     }
@@ -188,7 +188,6 @@ var bug = function(setings)
                 var bugLeftX =  Math.round(self.bugDom.position().left);
                 var bugRightX = bugLeftX + self.bugWidth;
 
-                //$.each(globalFlyingApple,function(index, appleOnGround){
                 for (var i = 0; i < globalFlyingApple.length; i++) {
                     var apple = globalFlyingApple[i];
                     var appleY = Math.round(apple.appleDom.position().top) + apple.heightY;
@@ -199,8 +198,8 @@ var bug = function(setings)
                                 $('#test2').html('KILL on X=' + apple.posXleft);   //KILL
                                 console.log('KILL');
                                 globalGeneratedApple.push(globalFlyingApple.splice(i,1)[0]);
-                                if (i != globalFlyingApple.length - 1) {i = i - 1}
-                                $('#appleOnGround-'+apple.appleId).unbind("webkitTransitionEnd");
+                                if (i != globalFlyingApple.length) {i = i - 1}
+                                $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
                                 apple.appleMeetBug(false,apple.posXleft,100);
                                 self.removeLife();
                             }
@@ -209,8 +208,8 @@ var bug = function(setings)
                                 $('#test3').html('CATCH on X=' + apple.posXleft);   //CATCH
                                 console.log('CATCH');
                                 globalGeneratedApple.push(globalFlyingApple.splice(i,1)[0]);
-                                if (i != globalFlyingApple.length - 1) {i = i - 1}
-                                $('#appleOnGround-'+apple.appleId).unbind("webkitTransitionEnd");
+                                if (i != globalFlyingApple.length) {i = i - 1}
+                                $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
                                 apple.appleMeetBug(true,apple.posXleft,100);
                                 self.increaseEaten();
                                 self.addWeight(10);
@@ -228,23 +227,17 @@ var bug = function(setings)
                     var appleOnGround = globalAppleOnGround[j];
 
                     if (bugRightX >= appleOnGround.posXleft && bugLeftX <= appleOnGround.posXright){
-                        $('#test2').html('BAD on X=' + appleOnGround.posXleft);   //KILL
-                        console.log('BAD');
-
                         if (appleOnGround.state == 'bad') {
-
+                            $('#test2').html('BAD on X=' + appleOnGround.posXleft);   //KILL
+                            console.log('BAD');
                         } else {
-
+                            $('#test3').html('GROUND on X=' + appleOnGround.posXleft);   //CATCH
+                            console.log('GROUND');
                         }
-//                        globalGeneratedApple.push(globalFlyingApple.splice(i,1)[0]);
-//                        if (i != globalFlyingApple.length - 1) {i = i - 1}
-//                        $('#appleOnGround-'+appleOnGround.appleId).unbind("webkitTransitionEnd");
-//                        appleOnGround.appleMeetBug(false,appleOnGround.posXleft,100);
-//                        self.removeLife();
                     }
                 }
             }
-        },50);
+        },0);
     }
 
     this.init();
