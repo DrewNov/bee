@@ -35,7 +35,7 @@ var bug = function(setings)
 
     var decreaseWeight = function () {
         setInterval(function(){
-            self.weight = self.weight-2;
+            self.weight = self.weight-((2*self.level)+1);
             if (self.weight >= 100 ) {
                 self.pixelPerMs = 0.5 - ((self.weight-100)*0.005);
             }
@@ -52,8 +52,13 @@ var bug = function(setings)
     this.increaseLevel = function () {
         ++self.level;
         $('.level span').html(self.level);
+        $('.nextLevel span').html(self.level);
+        $('.nextLevel').css({'opacity':1});
+        $('.nextLevel').bind('webkitTransitionEnd',function(){
+            $('.nextLevel').css({'opacity':0});
+        });
         self.toNextLevel = self.toNextLevel +self.level*5;
-        globalTime = 2000 - self.level*100;
+        globalTime = 2000 - self.level*150;
     }
 
     this.increaseEaten = function () {
@@ -62,7 +67,7 @@ var bug = function(setings)
         if(self.eaten == self.toNextLevel)
         {
             self.increaseLevel();
-        }
+        }                                    $('.nextLevel').css({'opacity':1});
     }
 
     this.removeLife = function () {
