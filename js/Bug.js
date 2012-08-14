@@ -38,7 +38,7 @@ var bug = function(setings)
             else{
                 self.pixelPerMs = 0.5;
             }
-            console.log('Speed: ' + self.pixelPerMs, self.weight);
+            //console.log('Speed: ' + self.pixelPerMs, self.weight);
 
             //console.log(self.weight);
         },1000);
@@ -188,7 +188,7 @@ var bug = function(setings)
                 var bugRightX = bugLeftX + self.bugWidth;
 
                 //$.each(globalFlyingApple,function(index, apple){
-                for (i = 0; i < globalFlyingApple.length; i++) {
+                for (var i = 0; i < globalFlyingApple.length; i++) {
                     var apple = globalFlyingApple[i];
                     var appleY = Math.round(apple.appleDom.position().top) + apple.heightY;
 
@@ -200,7 +200,7 @@ var bug = function(setings)
                                 globalGeneratedApple.push(globalFlyingApple.splice(i,1)[0]);
                                 if (i != globalFlyingApple.length - 1) {i = i - 1}
                                 $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
-                                apple.appleMeetBug(true);
+                                apple.appleMeetBug(false,apple.posXleft,100);
                                 self.removeLife();
                             }
                         } else {
@@ -210,7 +210,7 @@ var bug = function(setings)
                                 globalGeneratedApple.push(globalFlyingApple.splice(i,1)[0]);
                                 if (i != globalFlyingApple.length - 1) {i = i - 1}
                                 $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
-                                apple.appleMeetBug(true);
+                                apple.appleMeetBug(true,apple.posXleft,100);
                                 self.increaseEaten();
                                 self.addWeight(10);
                             }
