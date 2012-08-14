@@ -29,21 +29,30 @@ $(document).ready(function(){
     };
 
     var gameDOM  = $('.game');
+    var navDom = $('.nav');
     var metaTag = $('meta[name=viewport]')
     var height = (window.innerHeight > 0) ? window.innerHeight : screen.height;
+    var width =  (window.innerWidth > 0) ? window.innerWidth : screen.width;
     var scaleCof = height/514;
+
     gameDOM.css({'height':height, 'width': 800*scaleCof});
+    navDom.css({'height':height, 'width': ((width-800*scaleCof)/2)});
     metaTag.attr('content','height=device-height, maximum-scale=1,minimum-scale=1, initial-scale=1, user-scalable=no');
 
     var objectBug = new bug({idGameBlock:'gameBug'});
 
     //----------for-testing--------
-    gameDOM.append('<div id="test1" style="position: absolute; right: 0; top: 0"></div>');
-    gameDOM.append('<div id="test2" style="position: absolute; right: 0; top: 20px"></div>');
-    gameDOM.append('<div id="test3" style="position: absolute; right: 0; top: 40px"></div>');
+    gameDOM.append('<div id="test1" style="position: absolute; right: 0px; top: 0px"></div>');
+    gameDOM.append('<div id="test2" style="position: absolute; right: 0px; top: 20px"></div>');
+    gameDOM.append('<div id="test3" style="position: absolute; right: 0px; top: 40px"></div>');
     gameDOM.bind('vmousemove',function(e){
         $('#test1').html('X:' + e.offsetX + '   Y:' + e.offsetY);
     });
+
+    //----------score-bar--------
+    gameDOM.append('<div id="level" style="position: absolute; left: 0px; top: 20px">Level: 1</div>');
+    gameDOM.append('<div id="eaten" style="position: absolute; left: 0px; top: 40px">Eaten: 0</div>');
+    gameDOM.append('<div id="lifes" style="position: absolute; left: 0px; top: 60px">Lifes: 3</div>');
 
     //----------mouse--------
     $('body').bind('touchmove',function(e){
@@ -84,12 +93,11 @@ $(document).ready(function(){
     });
 
     //----------accelerometer--------
-/*    $(window).bind('acc', function(e) {
-        //console.log('wat');
-        //console.log(e.originalEvent.beta);
-        console.log('accX', e.accX);
-        objectBug.bugMoveAcc(e);
-    });*/
+//    $(window).bind('acc', function(e) {
+//        //console.log(e.originalEvent.beta);
+//        console.log('accX', e.accX);
+//        objectBug.bugMoveAcc(e);
+//    });
 });
 
 
