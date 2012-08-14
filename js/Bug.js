@@ -53,13 +53,13 @@ var bug = function(setings)
         ++self.level;
         $('.level span').html(self.level);
         $('.nextLevel span').html(self.level);
-        $('.nextLevel').css({'opacity':1});
         $('.nextLevel').bind('webkitTransitionEnd',function(){
             $('.nextLevel').css({'opacity':0});
             $(this).unbind('webkitTransitionEnd');
         });
+        $('.nextLevel').css({'opacity':1});
         self.toNextLevel = self.toNextLevel +self.level*5;
-        globalTime = 2000 - self.level*150;
+        globalTime = 2000 - self.level*300;
     }
 
     this.increaseEaten = function () {
@@ -68,7 +68,7 @@ var bug = function(setings)
         if(self.eaten == self.toNextLevel)
         {
             self.increaseLevel();
-        }                                    $('.nextLevel').css({'opacity':1});
+        }
     }
 
     this.removeLife = function () {

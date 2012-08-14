@@ -19,6 +19,7 @@ $(document).ready(
 
         }
         setInterval(function(){
+            console.log(globalTime);
             var appleInFall = globalGeneratedApple.shift();
             globalFlyingApple.push(appleInFall);
             appleInFall.animateApple();
@@ -29,7 +30,7 @@ $(document).ready(
                 appleInFall.appleExpire();
             });
 
-        },globalTime)
+        },1500)
 
     }
 );
