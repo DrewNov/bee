@@ -42,10 +42,14 @@ var Apple = function(iteration)
         //console.log(globalAppleOnGround);
         setTimeout(function(){
             self.appleDom.css({"background": 'url("img/purple_red.png")',"background-size" : 'cover'});
+            self.state = 'bad';
         }, 1000);
 
         setTimeout(function(){
-            globalGeneratedApple.push(globalAppleOnGround.shift());
+            if(globalAppleOnGround.length>0)
+            {
+                globalGeneratedApple.push(globalAppleOnGround.shift());
+            }
             self.appleDom.css({'top':(self.scaleCof*212)+'px','-webkit-transition-duration': '0s',"visibility": "hidden","background" : ""});
             self.state= 'tree'; //again on tree
             self.time= 0;

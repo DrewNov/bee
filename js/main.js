@@ -64,9 +64,9 @@ $(document).ready(function(){
     });
 
     //----------score-bar--------
-    gameDOM.append('<div id="level" style="position: absolute; left: 0px; top: 20px">Level: 1</div>');
-    gameDOM.append('<div id="eaten" style="position: absolute; left: 0px; top: 40px">Eaten: 0</div>');
-    gameDOM.append('<div id="lifes" style="position: absolute; left: 0px; top: 60px">Lifes: 3</div>');
+    gameDOM.append('<div id="level" >Level: <span>1</span></div>');
+    gameDOM.append('<div id="eaten" >Eaten: <span>0</span></div>');
+    gameDOM.append('<div id="lifes" >Lifes: <span>3</span></div>');
 
     //----------mouse--------
     $('body').bind('touchmove',function(e){
