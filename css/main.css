@@ -7,6 +7,7 @@
     /*-webkit-backface-visibility: hidden;*/
     /*-webkit-perspective: 1000;*/
 }
+
 html,body {width: 100%; height: 100%;}
 
 .game {
@@ -14,6 +15,7 @@ html,body {width: 100%; height: 100%;}
     margin: 0 auto;
     background-size: auto 100%;
     position: relative;
+
 }
 
 .apple{
@@ -41,6 +43,7 @@ html,body {width: 100%; height: 100%;}
     -webkit-transition-timing-function: linear;
 }
 
+
 .mainBar {
     position: absolute;
     border: 1px solid #000;
@@ -59,15 +62,16 @@ html,body {width: 100%; height: 100%;}
 }
 .nav-left { position: absolute; left: 0; top: 0; background: url("../img/left.png")  no-repeat center center; background-size: 100% auto;}
 .nav-right { position: absolute; right: 0; top: 0; background: url("../img/right.png")  no-repeat center center; background-size: 100% auto; }
-.redApple { position: absolute; background: url("../img/red_2.png") no-repeat; background-size: cover;  }
-.greenApple {position: absolute; background: url("../img/green_5.png") no-repeat;  background-size: cover; }
-.yellowApple {position: absolute; background: url("../img/yellow_2.png") no-repeat;  background-size: cover;}
-.purpleApple {position: absolute; background: url("../img/purple_red.png") no-repeat;  background-size: cover;}
+.redApple { position: absolute; background: url("../img/red_orange.png") no-repeat; background-size: cover;  }
+.greenApple {position: absolute; background: url("../img/or1.png") no-repeat;  background-size: cover; }
+.yellowApple {position: absolute; background: url("../img/yl1.png") no-repeat;  background-size: cover;}
+.purpleApple {position: absolute; background: url("../img/pr1.png") no-repeat;  background-size: cover;}
 
 
 
 /* #Media Queries
 ================================================== */
+
 
 /* Tablet Portrait size to standard 960 (devices and browsers) */
 @media only screen and (min-width: 768px) and (max-width: 959px) {
