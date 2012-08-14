@@ -22,9 +22,7 @@ $(document).ready(
         setInterval(function(){
             //console.log(globalGeneratedApple, globalFlyingApple, globalAppleOnGround);
             var appleInFall = globalGeneratedApple.shift();
-            //console.log('first element'+ globalGeneratedApple.slice(0,1)) ;
             globalFlyingApple.push(appleInFall);
-           // console.log('transition - start for '+ appleInFall.appleId);
             appleInFall.animateApple();
             $('#apple-'+appleInFall.appleId).bind("webkitTransitionEnd",function(){
                 console.log('add apple to ground');

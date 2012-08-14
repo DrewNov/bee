@@ -42,8 +42,11 @@ var Apple = function(iteration)
     this.appleExpire = function(){
         //console.log(globalAppleOnGround);
         setTimeout(function(){
-            self.appleDom.css({"background": 'url("img/purple_orange.png")',"background-size" : 'cover'});
-            self.state = 'bad';
+            if(self.timerOn)
+            {
+                self.appleDom.css({"background": 'url("img/purple_orange.png")',"background-size" : 'cover'});
+                self.state = 'bad';
+            }
         }, 1000);
 
         setTimeout(function(){
@@ -55,9 +58,10 @@ var Apple = function(iteration)
                 }
                 self.appleDom.css({'top':(self.scaleCof*212)+'px','-webkit-transition-duration': '0s',"visibility": "hidden","background" : ""});
                 self.state= 'tree'; //again on tree
-                self.time= 0;
-                $('#apple-'+self.appleId).unbind("webkitTransitionEnd");
+
             }
+            self.state= 'tree';
+            $('#apple-'+self.appleId).unbind("webkitTransitionEnd");
             self.timerOn = true;
         }, 3000);// return apple to the tree
     }

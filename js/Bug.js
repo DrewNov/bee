@@ -230,6 +230,7 @@ var bug = function(setings)
                     console.log(globalAppleOnGround.length);
                     if (bugRightX >= appleOnGround.posXleft && bugLeftX <= appleOnGround.posXright){
                         $('#test2').html('BAD on X=' + appleOnGround.posXleft);   //KILL
+                        globalGeneratedApple.push(globalAppleOnGround.splice(j,1)[0]);
                         console.log(appleOnGround.state);
                         if (appleOnGround.state == 'bad') {
                             appleOnGround.appleMeetBug(false,appleOnGround.posXleft,100);
@@ -242,7 +243,6 @@ var bug = function(setings)
                             self.addWeight(10);
                             appleOnGround.timerOn = false;
                         }
-                        globalGeneratedApple.push(globalAppleOnGround.splice(j,1)[0]);
                     }
                 }
             }
