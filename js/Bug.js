@@ -5,7 +5,7 @@ var bug = function(setings)
     this.trans = 'translate3d(0,0,0)';
     this.halfWidth = window.screen.width/ 2;
     this.pixelPerMs = 0.5;
-    this.weight = 150;
+    this.weight = 100;
     this.eaten = 0;
     this.life = 3;
     this.level = 1;
@@ -33,16 +33,20 @@ var bug = function(setings)
         setInterval(function(){
             //console.log(self.weight);
             --self.weight;
+            if (self.weight >= 100 ) {
+                self.pixelPerMs = 0.5 - ((self.weight-100)*0.005);
+            }
+            else{
+                self.pixelPerMs = 0.5;
+            }
+            //console.log('Speed: ' + self.pixelPerMs, self.weight);
+
             //console.log(self.weight);
         },1000);
     }
 
     this.addWeight = function (bonus) {
         self.weight += bonus;
-        if (self.pixelPerMs >= 0.05) {
-            self.pixelPerMs -= 0.03;
-        }
-        console.log('Speed: ' + self.pixelPerMs);
     }
 
     this.increaseLevel = function () {
@@ -97,13 +101,13 @@ var bug = function(setings)
     }
 
     var addStatusBar = function (){
-        var barBlock = $('<div class="mainBar"></div>');
-        var subBarNormalBlock = $('<div class="subBarNormal"></div>');
-        var subBarOverEatBlock = $('<div class="subBarOverEat"></div>');
-        var normalIndicator = $('<div class="indicator"></div>');
-        var overIndicator = $('<div class="indicator"></div>');
-        var barWidth = 200;
-        var barHeight = 14;
+        var barBlock = $('<div class="mainBar"></div>'),
+            subBarNormalBlock = $('<div class="subBarNormal"></div>'),
+            subBarOverEatBlock = $('<div class="subBarOverEat"></div>'),
+            normalIndicator = $('<div class="indicator"></div>'),
+            overIndicator = $('<div class="indicator"></div>'),
+            barWidth = 200,
+            barHeight = 14;
 
         barBlock.css({'width':self.scaleCof*barWidth+'px','height':self.scaleCof*barHeight+'px'});
         subBarNormalBlock.append(normalIndicator);
@@ -113,16 +117,25 @@ var bug = function(setings)
         self.gameBlock.append(barBlock);
 
         setInterval(function(){
-            if(subBarNormalBlock.width() > self.weight*self.scaleCof )
+            var scaleWeight = self.weight*self.scaleCof;
+
+            if(subBarNormalBlock.width() > scaleWeight  && scaleWeight > 0)
             {
-                normalIndicator.css({'width':self.weight*self.scaleCof+'px', 'height':'100%','backgroundColor':'#73d216'});
+                normalIndicator.css({'width':scaleWeight+'px', 'height':'100%','backgroundColor':'#73d216'});
                 overIndicator.css({'width':'0px' ,'height':'100%','backgroundColor':'#ffcc00'});
                 // console.log('start animate normal status bar current width'+subBarNormalBlock.width()) ;
+            }
+            else if ((self.scaleCof*barWidth) <= scaleWeight || scaleWeight <= 0)
+            {
+                self.removeLife();
+                self.weight = 100;
+                normalIndicator.css({'width':'100%', 'height':'100%','backgroundColor':'#73d216'});
+                overIndicator.css({'width':'0px','height':'100%','backgroundColor':'#ffcc00'});
             }
             else
             {
                 normalIndicator.css({'width':'100%', 'height':'100%','backgroundColor':'#73d216'});
-                overIndicator.css({'width':(self.weight*self.scaleCof - subBarNormalBlock.width())+'px','height':'100%','backgroundColor':'#ffcc00'});
+                overIndicator.css({'width':(scaleWeight - subBarNormalBlock.width())+'px','height':'100%','backgroundColor':'#ffcc00'});
                 // console.log('start animate over status bar current width'+(self.weight*self.scaleCof - subBarNormalBlock.width())+'px') ;
             }
         },1000);
@@ -176,7 +189,7 @@ var bug = function(setings)
                 var bugRightX = bugLeftX + self.bugWidth;
 
                 //$.each(globalFlyingApple,function(index, apple){
-                for (i = 0; i < globalFlyingApple.length; i++) {
+                for (var i = 0; i < globalFlyingApple.length; i++) {
                     var apple = globalFlyingApple[i];
                     var appleY = Math.round(apple.appleDom.position().top) + apple.heightY;
 
@@ -188,7 +201,7 @@ var bug = function(setings)
                                 globalGeneratedApple.push(globalFlyingApple.splice(i,1)[0]);
                                 if (i != globalFlyingApple.length - 1) {i = i - 1}
                                 $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
-                                apple.appleMeetBug(true);
+                                apple.appleMeetBug(false,apple.posXleft,100);
                                 self.removeLife();
                             }
                         } else {
@@ -198,7 +211,7 @@ var bug = function(setings)
                                 globalGeneratedApple.push(globalFlyingApple.splice(i,1)[0]);
                                 if (i != globalFlyingApple.length - 1) {i = i - 1}
                                 $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
-                                apple.appleMeetBug(true);
+                                apple.appleMeetBug(true,apple.posXleft,100);
                                 self.increaseEaten();
                                 self.addWeight(10);
                             }

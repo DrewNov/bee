@@ -4,10 +4,12 @@ $(document).bind("mobileinit", function(){
 
 $(document).ready(function(){
     var audio = document.createElement('audio');
-    audio.src =("../media/fone.mp3");
+    audio.src =("../media/la-la.mp3");
     audio.autobuffer = true;
     audio.load(); // force the audio to start loading...doesn't work in iOS
     audio.play();
+    audio.volume="0.1";
+    audio.loop=true;
     console.log(audio);
 
     var track = this;
@@ -17,8 +19,15 @@ $(document).ready(function(){
         if (track.updateCallback !== null) track.updateCallback();
     };
 
+
+
+
     audio.addEventListener('progress', progress, false);
     track.updateCallback = null;
+
+    var timer= function(){
+        setTimeout(function(){audio.currentTime=0,audio.play()},1);
+    };
 
     var gameDOM  = $('.game');
     var navDom = $('.nav');

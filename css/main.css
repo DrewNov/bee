@@ -59,7 +59,14 @@ html,body {width: 100%; height: 100%;}
 .greenApple {position: absolute; background: url("../img/green_5.png") no-repeat;  background-size: cover; }
 .yellowApple {position: absolute; background: url("../img/yellow_2.png") no-repeat;  background-size: cover;}
 .purpleApple {position: absolute; background: url("../img/purple_red.png") no-repeat;  background-size: cover;}
+.msg {
+    position: absolute;
+    color: green;
+    font-weight: bold;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-transition: bottom 2s;
 
+}
 
 
 /* #Media Queries

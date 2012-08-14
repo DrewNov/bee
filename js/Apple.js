@@ -35,7 +35,7 @@ var Apple = function(iteration)
     }
 
     this.animateApple = function (){
-        self.appleDom.css({"visibility": "visible",'-webkit-transition-duration': '4s','top':(curPosTop+self.scaleCof*277)+'px'});
+        self.appleDom.css({"visibility": "visible",'-webkit-transition-duration': '4s','top':(curPosTop+self.scaleCof*260)+'px'});
     }
 
     this.appleExpire = function(){
@@ -52,9 +52,26 @@ var Apple = function(iteration)
             $('#apple-'+self.appleId).unbind("webkitTransitionEnd");
         }, 3000);// return apple to the tree
     }
-    this.appleMeetBug = function() {
+    this.appleMeetBug = function(action,x, y) {
+        var msg = '+1 apple',
+            color = 'green';
+        if (!action){
+
+            var msg = '-1 life',
+                color = 'red'
+        }
+        var showMsg = $('<div class="msg" id="msg-'+x+'" >'+msg+'</div>');
+        showMsg.css({'left':x+'px','bottom':(70*self.scaleCof)+'px','color':color});
+        $('#gameBug').append(showMsg);
+        $('#msg-'+x).bind('webkitTransitionEnd',function(){
+            $(this).remove();
+        });
+        setTimeout(function(){
+            showMsg.css({'bottom':((50*self.scaleCof)+y)+'px'});
+        },0);
 
         self.appleDom.css({'top':(self.scaleCof*212)+'px','-webkit-transition-duration': '0s',"visibility": "hidden","background" : ""});
+
     }
 
     this.init();
