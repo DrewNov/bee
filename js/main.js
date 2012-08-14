@@ -43,6 +43,19 @@ $(document).ready(function(){
     var objectBug = new bug({idGameBlock:'gameBug'});
 
     //----------for-testing--------
+    var pos = navigator.appVersion.toLowerCase().search('android') + 8;
+    var androidVersion = navigator.appVersion.substr(pos,3);
+    if (androidVersion == '2.2' || androidVersion == '2.3') {
+        objectBug.trans = '';
+        objectBug.bugDom.css({'-webkit-transform':'scaleX(-1)'});
+    } else {
+        objectBug.bugDom.css({
+            '-webkit-backface-visibility':'hidden',
+            '-webkit-perspective':'1000',
+            '-webkit-transform':'translate3d(0,0,0) scaleX(-1)'
+        });
+    }
+
     gameDOM.append('<div id="test1" style="position: absolute; right: 0px; top: 0px"></div>');
     gameDOM.append('<div id="test2" style="position: absolute; right: 0px; top: 20px"></div>');
     gameDOM.append('<div id="test3" style="position: absolute; right: 0px; top: 40px"></div>');
@@ -51,9 +64,9 @@ $(document).ready(function(){
     });
 
     //----------score-bar--------
-    gameDOM.append('<div id="level" style="position: absolute; left: 0px; top: 20px">Level: 1</div>');
-    gameDOM.append('<div id="eaten" style="position: absolute; left: 0px; top: 40px">Eaten: 0</div>');
-    gameDOM.append('<div id="lifes" style="position: absolute; left: 0px; top: 60px">Lifes: 3</div>');
+    gameDOM.append('<div id="level" >Level: <span>1</span></div>');
+    gameDOM.append('<div id="eaten" >Eaten: <span>0</span></div>');
+    gameDOM.append('<div id="lifes" >Lifes: <span>3</span></div>');
 
     //----------mouse--------
     $('body').bind('touchmove',function(e){

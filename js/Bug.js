@@ -2,6 +2,7 @@
 var bug = function(setings)
 {
     this.param = setings;
+    this.trans = 'translate3d(0,0,0)';
     this.halfWidth = window.screen.width/ 2;
     this.pixelPerMs = 0.5;
     this.weight = 100;
@@ -38,7 +39,7 @@ var bug = function(setings)
             else{
                 self.pixelPerMs = 0.5;
             }
-            console.log('Speed: ' + self.pixelPerMs, self.weight);
+            //console.log('Speed: ' + self.pixelPerMs, self.weight);
 
             //console.log(self.weight);
         },1000);
@@ -147,13 +148,13 @@ var bug = function(setings)
         if ((e.screenX < self.halfWidth && curPos >= 0))
         {
             time = curPos/self.pixelPerMs;
-            self.bugDom.css({'-webkit-transform':'scaleX(1)','-webkit-transition-duration': time+'ms','left':'1px'});
+            self.bugDom.css({'-webkit-transform':self.trans+' scaleX(1)','-webkit-transition-duration': time+'ms','left':'1px'});
             //self.bugDom.css({'background-image':'url(img/bug.png)','-webkit-transition-duration': time+'ms','left':'1px'});
         }
         else if (e.screenX >= self.halfWidth && curPos <= gameBlockWidth - self.bugWidth)
         {
             time = (gameBlockWidth - self.bugWidth-curPos)/self.pixelPerMs;
-            self.bugDom.css({'-webkit-transform':'scaleX(-1)','-webkit-transition-duration': time+'ms','left':(gameBlockWidth - self.bugWidth)+'px'});
+            self.bugDom.css({'-webkit-transform':self.trans+' scaleX(-1)','-webkit-transition-duration': time+'ms','left':(gameBlockWidth - self.bugWidth)+'px'});
             //self.bugDom.css({'background-image':'url(img/bug_inv.png)','-webkit-transition-duration': time+'ms','left':(gameBlockWidth - self.bugWidth)+'px'});
         }
     }
@@ -187,8 +188,8 @@ var bug = function(setings)
                 var bugLeftX =  Math.round(self.bugDom.position().left);
                 var bugRightX = bugLeftX + self.bugWidth;
 
-                //$.each(globalFlyingApple,function(index, apple){
-                for (i = 0; i < globalFlyingApple.length; i++) {
+                //$.each(globalFlyingApple,function(index, appleOnGround){
+                for (var i = 0; i < globalFlyingApple.length; i++) {
                     var apple = globalFlyingApple[i];
                     var appleY = Math.round(apple.appleDom.position().top) + apple.heightY;
 
@@ -199,8 +200,8 @@ var bug = function(setings)
                                 console.log('KILL');
                                 globalGeneratedApple.push(globalFlyingApple.splice(i,1)[0]);
                                 if (i != globalFlyingApple.length - 1) {i = i - 1}
-                                $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
-                                apple.appleMeetBug(true);
+                                $('#appleOnGround-'+apple.appleId).unbind("webkitTransitionEnd");
+                                apple.appleMeetBug(false,apple.posXleft,100);
                                 self.removeLife();
                             }
                         } else {
@@ -209,8 +210,8 @@ var bug = function(setings)
                                 console.log('CATCH');
                                 globalGeneratedApple.push(globalFlyingApple.splice(i,1)[0]);
                                 if (i != globalFlyingApple.length - 1) {i = i - 1}
-                                $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
-                                apple.appleMeetBug(true);
+                                $('#appleOnGround-'+apple.appleId).unbind("webkitTransitionEnd");
+                                apple.appleMeetBug(true,apple.posXleft,100);
                                 self.increaseEaten();
                                 self.addWeight(10);
                             }
@@ -221,7 +222,29 @@ var bug = function(setings)
                     }
                 }
             }
-        },0);
+
+            if (globalAppleOnGround.length > 0) {
+                for (var j = 0; j < globalAppleOnGround.length; j++) {
+                    var appleOnGround = globalAppleOnGround[j];
+
+                    if (bugRightX >= appleOnGround.posXleft && bugLeftX <= appleOnGround.posXright){
+                        $('#test2').html('BAD on X=' + appleOnGround.posXleft);   //KILL
+                        console.log('BAD');
+
+                        if (appleOnGround.state == 'bad') {
+
+                        } else {
+
+                        }
+//                        globalGeneratedApple.push(globalFlyingApple.splice(i,1)[0]);
+//                        if (i != globalFlyingApple.length - 1) {i = i - 1}
+//                        $('#appleOnGround-'+appleOnGround.appleId).unbind("webkitTransitionEnd");
+//                        appleOnGround.appleMeetBug(false,appleOnGround.posXleft,100);
+//                        self.removeLife();
+                    }
+                }
+            }
+        },50);
     }
 
     this.init();
