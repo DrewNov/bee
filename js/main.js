@@ -7,7 +7,7 @@ $(document).ready(function(){
     audio.src =("../media/la-la.mp3");
     audio.autobuffer = true;
     audio.load(); // force the audio to start loading...doesn't work in iOS
-    //audio.play();
+    audio.play();
     audio.volume="0.1";
     audio.loop=true;
     console.log(audio);
@@ -38,7 +38,6 @@ $(document).ready(function(){
 
     gameDOM.css({'height':height, 'width': 800*scaleCof});
     navDom.css({'height':height, 'width': ((width-800*scaleCof)/2)});
-    metaTag.attr('content','height=device-height, maximum-scale=1,minimum-scale=1, initial-scale=1, user-scalable=no');
 
     var objectBug = new bug({idGameBlock:'gameBug'});
 
@@ -62,6 +61,11 @@ $(document).ready(function(){
     gameDOM.bind('vmousemove',function(e){
         $('#test1').html('X:' + e.offsetX + '   Y:' + e.offsetY);
     });
+
+    //----------score-bar--------
+    gameDOM.append('<div id="level" >Level: <span>1</span></div>');
+    gameDOM.append('<div id="eaten" >Eaten: <span>0</span></div>');
+    gameDOM.append('<div id="lifes" >Lifes: <span>3</span></div>');
 
     //----------mouse--------
     $('body').bind('touchmove',function(e){

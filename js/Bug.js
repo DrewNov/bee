@@ -184,19 +184,17 @@ var bug = function(setings)
                 var bugLeftX =  Math.round(self.bugDom.position().left);
                 var bugRightX = bugLeftX + self.bugWidth;
 
-                //$.each(globalFlyingApple,function(index, appleOnGround){
                 for (var i = 0; i < globalFlyingApple.length; i++) {
                     var apple = globalFlyingApple[i];
                     var appleY = Math.round(apple.appleDom.position().top) + apple.heightY;
 
                     if (appleY >= self.posBottomTopY) {
-
                         if (apple.nearBug == false){
                             if (bugRightX >= apple.posXleft && bugLeftX <= apple.posXright){
                                 $('#test2').html('KILL on X=' + apple.posXleft);   //KILL
                                 console.log('KILL');
                                 globalGeneratedApple.push(globalFlyingApple.splice(i,1)[0]);
-                                if (i != globalFlyingApple.length - 1) {i = i - 1}
+                                if (i != globalFlyingApple.length) {i = i - 1}
                                 $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
                                 apple.appleMeetBug(false,apple.posXleft,100);
                                 self.removeLife();
@@ -206,7 +204,7 @@ var bug = function(setings)
                                 $('#test3').html('CATCH on X=' + apple.posXleft);   //CATCH
                                 console.log('CATCH');
                                 globalGeneratedApple.push(globalFlyingApple.splice(i,1)[0]);
-                                if (i != globalFlyingApple.length - 1) {i = i - 1}
+                                if (i != globalFlyingApple.length) {i = i - 1}
                                 $('#apple-'+apple.appleId).unbind("webkitTransitionEnd");
                                 apple.appleMeetBug(true,apple.posXleft,100);
                                 self.increaseEaten();
@@ -223,7 +221,7 @@ var bug = function(setings)
             if (globalAppleOnGround.length > 0) {
                 for (var j = 0; j < globalAppleOnGround.length; j++) {
                     var appleOnGround = globalAppleOnGround[j];
-                    console.log(globalAppleOnGround.length);
+
                     if (bugRightX >= appleOnGround.posXleft && bugLeftX <= appleOnGround.posXright){
                         $('#test2').html('BAD on X=' + appleOnGround.posXleft);   //KILL
                         globalGeneratedApple.push(globalAppleOnGround.splice(j,1)[0]);
@@ -232,7 +230,6 @@ var bug = function(setings)
                             appleOnGround.appleMeetBug(false,appleOnGround.posXleft,100);
                             self.removeLife();
                             appleOnGround.timerOn = false;
-
                         } else {
                             appleOnGround.appleMeetBug(true,appleOnGround.posXleft,100);
                             self.increaseEaten();
@@ -242,10 +239,7 @@ var bug = function(setings)
                     }
                 }
             }
-        },50);
-        setInterval(
-
-        );
+        },0);
     }
 
     this.init();
