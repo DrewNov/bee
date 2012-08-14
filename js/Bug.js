@@ -56,6 +56,7 @@ var bug = function(setings)
         $('.nextLevel').css({'opacity':1});
         $('.nextLevel').bind('webkitTransitionEnd',function(){
             $('.nextLevel').css({'opacity':0});
+            $(this).unbind('webkitTransitionEnd');
         });
         self.toNextLevel = self.toNextLevel +self.level*5;
         globalTime = 2000 - self.level*150;
