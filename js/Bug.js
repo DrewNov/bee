@@ -16,9 +16,11 @@ var bug = function(setings)
     this.posBottomY = '' ;
     this.bugWidth = '';
     this.bugHeight = '';
-    var self = this;
-    var gameBlockWidth = this.gameBlock.width();
-    var gameBlockHeight = this.gameBlock.height();
+    this.toNextLevel = 5;
+    this.gamePop = new popup();
+    var self = this,
+        gameBlockWidth = this.gameBlock.width(),
+        gameBlockHeight = this.gameBlock.height();
 
     this.init = function(){
         prepareBug();
@@ -27,21 +29,19 @@ var bug = function(setings)
         self.posBottomTopY = this.gameBlock.height() - parseInt(self.bugDom.css('bottom')) - 49*self.scaleCof;
         self.posBottomY = this.gameBlock.height() - parseInt(self.bugDom.css('bottom'));
         bugCheckColision();
+        addBugInfo();
+
     }
 
     var decreaseWeight = function () {
         setInterval(function(){
-            //console.log(self.weight);
-            --self.weight;
+            self.weight = self.weight-2;
             if (self.weight >= 100 ) {
                 self.pixelPerMs = 0.5 - ((self.weight-100)*0.005);
             }
             else{
                 self.pixelPerMs = 0.5;
             }
-            //console.log('Speed: ' + self.pixelPerMs, self.weight);
-
-            //console.log(self.weight);
         },1000);
     }
 
@@ -51,38 +51,26 @@ var bug = function(setings)
 
     this.increaseLevel = function () {
         ++self.level;
-        $('#level').html('Level: ' + self.level);
-
-        if (self.level == 3) {
-            //alert('Winner!!!');
-            return true;
-        } else {
-            return false;
-        }
+        $('.level span').html(self.level);
+        self.toNextLevel = self.toNextLevel +self.level*5;
+        globalTime = 2000 - self.level*100;
     }
 
     this.increaseEaten = function () {
         ++self.eaten;
-        $('#eaten').html('Eaten: ' + self.eaten);
-
-        if (self.eaten == 5) {
-            //alert('Level 2 !');
+        $('.eaten span').html(self.eaten);
+        if(self.eaten == self.toNextLevel)
+        {
             self.increaseLevel();
-            return true;
-        } else {
-            return false;
         }
     }
 
     this.removeLife = function () {
         --self.life;
-        $('#lifes').html('Lifes: ' + self.life);
+        $('.lifes span').html(self.life);
 
-        if (self.life > 0) {
-            return true;
-        } else {
-            //alert('Game over...');
-            return false;
+        if (self.life == 0) {
+            self.gamePop.show('pop-end');
         }
     }
 
@@ -109,7 +97,7 @@ var bug = function(setings)
             barWidth = 200,
             barHeight = 14;
 
-        barBlock.css({'width':self.scaleCof*barWidth+'px','height':self.scaleCof*barHeight+'px'});
+        barBlock.css({'width':self.scaleCof*barWidth+'px','height':self.scaleCof*barHeight+'px','top':self.scaleCof*15+'px','left':self.scaleCof*115+'px'});
         subBarNormalBlock.append(normalIndicator);
         subBarOverEatBlock.append(overIndicator);
         barBlock.append(subBarNormalBlock);
@@ -139,6 +127,14 @@ var bug = function(setings)
                 // console.log('start animate over status bar current width'+(self.weight*self.scaleCof - subBarNormalBlock.width())+'px') ;
             }
         },1000);
+    }
+
+    var addBugInfo = function() {
+        var mainTab = $('.playerInfo'),
+            tabImg = $('.playerInfo img');
+        mainTab.css({'top':(self.scaleCof*55)+'px','left':(self.scaleCof*20)+'px'});
+        tabImg.css({'height':(mainTab.find('li').height()*0.6)+'px',width:'auto'});
+        self.gameBlock.append();
     }
 
     this.bugMove = function (e){

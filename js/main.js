@@ -7,7 +7,7 @@ $(document).ready(function(){
     audio.src =("../media/la-la.mp3");
     audio.autobuffer = true;
     audio.load(); // force the audio to start loading...doesn't work in iOS
-    audio.play();
+    //audio.play();
     audio.volume="0.1";
     audio.loop=true;
     console.log(audio);
@@ -31,7 +31,7 @@ $(document).ready(function(){
 
     var gameDOM  = $('.game');
     var navDom = $('.nav');
-    var metaTag = $('meta[name=viewport]')
+    var metaTag = $('meta[name=viewport]');
     var height = (window.innerHeight > 0) ? window.innerHeight : screen.height;
     var width =  (window.innerWidth > 0) ? window.innerWidth : screen.width;
     var scaleCof = height/514;
@@ -62,11 +62,6 @@ $(document).ready(function(){
     gameDOM.bind('vmousemove',function(e){
         $('#test1').html('X:' + e.offsetX + '   Y:' + e.offsetY);
     });
-
-    //----------score-bar--------
-    gameDOM.append('<div id="level" >Level: <span>1</span></div>');
-    gameDOM.append('<div id="eaten" >Eaten: <span>0</span></div>');
-    gameDOM.append('<div id="lifes" >Lifes: <span>3</span></div>');
 
     //----------mouse--------
     $('body').bind('touchmove',function(e){

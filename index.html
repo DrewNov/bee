@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>SummerHack Game</title>
-    <link type="text/css" href="css/main.css?2" rel="stylesheet">
+    <link type="text/css" href="css/main.css?3" rel="stylesheet">
     <!--<script src="http://10.6.2.84:8080/target/target-script-min.js#anonymous"></script>-->
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/jquery-mobile.js" type="text/javascript"></script>
@@ -12,16 +12,25 @@
     <script src="js/AppleFactory.js" type="text/javascript"></script>
     <script src="js/navigation.js" type="text/javascript"></script>
     <script src="js/Apple.js" type="text/javascript"></script>
+    <script src="js/pop.js" type="text/javascript"></script>
 </head>
 <body>
 <!--<embed name="fone" src="/media/fone.mp3" loop="true" hidden="true" autostart="true">-->
-
 <div class="game" id="gameBug">
+    <ul class="playerInfo">
+        <li class="life">Lifes: <span>3</span><img src="img/live.png"></li>
+        <li class="eaten">Eaten: <span>0</span><img src="img/orng.png"></li>
+        <li class="level">Level: <span>1</span></li>
+
+    </ul>
 </div>
 <div class="nav nav-left"></div>
 <div class="nav nav-right"></div>
 
-
-
+<div id="pop-end" style="display: none;">
+    <img src="img/gover.jpg" class="overImg" alt="game over"><br>
+    <a href="/" class="link reload">Try again</a>
+</div>
 </body>
+
 </html>
