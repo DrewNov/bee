@@ -91,6 +91,7 @@ html,body {width: 100%; height: 100%;}
     text-decoration: none;
     color: #ffffff;
     font-size: 17px;
+    z-index: 1000;
 }
 .overImg {
     width: auto;

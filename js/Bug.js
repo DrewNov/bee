@@ -77,11 +77,15 @@ var bug = function(setings)
         --self.life;
         $('.life span').html(self.life);
         if (self.life == 0) {
-            $('body').unbind("vmousedown");
-            $('a').bind("vmousedown",function(){
-                e.preventDefault();
-                console.log('1');
+            $('body').bind("vmousedown",function(){
+                $('.link').bind("vmousedown",function(){
+                    document.location.reload();
+                    return true;
+                });
+                return true;
+
             });
+
             self.gamePop.show('pop-end');
         }
     }
