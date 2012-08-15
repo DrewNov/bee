@@ -23,7 +23,7 @@ var Apple = function(iteration)
         self.appleDom.addClass(cssClass[Math.floor(Math.random() * (3))]);
         self.appleDom.css({
             "left": Math.floor((Math.random()*(410*self.scaleCof))+self.scaleCof*179),
-            "top":self.scaleCof*212+"px" ,
+            "top":Math.round(self.scaleCof*212)+"px" ,
             'width':self.scaleCof*20+'px' ,
             'height':self.scaleCof*21+'px'
         });
@@ -40,7 +40,6 @@ var Apple = function(iteration)
     }
 
     this.appleExpire = function(){
-        //console.log(globalAppleOnGround);
         setTimeout(function(){
             if(self.timerOn)
             {
@@ -67,13 +66,14 @@ var Apple = function(iteration)
     }
     this.appleMeetBug = function(action,x, y) {
         var msg = '+1 apple',
-            color = 'green';
+            color = 'green',
+            showMsg;
         if (!action){
 
-            var msg = '-1 life',
-                color = 'red'
+            msg = '-1 life';
+            color = 'red';
         }
-        var showMsg = $('<div class="msg" id="msg-'+x+'" >'+msg+'</div>');
+        showMsg = $('<div class="msg" id="msg-'+x+'" >'+msg+'</div>');
         showMsg.css({'left':x+'px','bottom':(70*self.scaleCof)+'px','color':color});
         $('#gameBug').append(showMsg);
         $('#msg-'+x).bind('webkitTransitionEnd',function(){
@@ -83,7 +83,7 @@ var Apple = function(iteration)
             showMsg.css({'bottom':((50*self.scaleCof)+y)+'px'});
         },0);
 
-        self.appleDom.css({'top':(self.scaleCof*212)+'px','-webkit-transition-duration': '0s',"visibility": "hidden","background" : ""});
+        self.appleDom.css({'top':Math.round(self.scaleCof*212)+'px','-webkit-transition-duration': '0s',"visibility": "hidden","background" : ""});
 
     }
 

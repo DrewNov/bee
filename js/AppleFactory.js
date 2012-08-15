@@ -19,12 +19,10 @@ $(document).ready(
 
         }
         setInterval(function(){
-            console.log(globalTime);
             var appleInFall = globalGeneratedApple.shift();
             globalFlyingApple.push(appleInFall);
             appleInFall.animateApple();
             $('#apple-'+appleInFall.appleId).bind("webkitTransitionEnd",function(){
-                console.log('add apple to ground');
                 appleInFall.state = 'Ground';
                 globalAppleOnGround.push(globalFlyingApple.shift());
                 appleInFall.appleExpire();
