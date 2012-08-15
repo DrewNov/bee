@@ -61,7 +61,11 @@ var bug = function(setings)
         });
         $('.nextLevel').css({'opacity':1});
         self.toNextLevel = self.toNextLevel +self.level*5;
-        globalTime = 2000 - self.level*200;
+        if (globalTime > 700)
+        {
+            globalTime = 2000 - self.level*200;
+        }
+
     }
 
     this.increaseEaten = function () {
@@ -105,6 +109,7 @@ var bug = function(setings)
 
     var addStatusBar = function (){
         var barBlock = $('<div class="mainBar"></div>'),
+            barName = $('<div class="barName">Hungry bar</div>'),
             subBarNormalBlock = $('<div class="subBarNormal"></div>'),
             subBarOverEatBlock = $('<div class="subBarOverEat"></div>'),
             normalIndicator = $('<div class="indicator"></div>'),
@@ -112,12 +117,14 @@ var bug = function(setings)
             barWidth = 200,
             barHeight = 14;
 
-        barBlock.css({'width':self.scaleCof*barWidth+'px','height':self.scaleCof*barHeight+'px','top':self.scaleCof*15+'px','left':self.scaleCof*115+'px'});
+        barBlock.css({'width':self.scaleCof*barWidth+'px','height':self.scaleCof*barHeight+'px','top':self.scaleCof*15+'px','left':self.scaleCof*135+'px'});
         subBarNormalBlock.append(normalIndicator);
         subBarOverEatBlock.append(overIndicator);
+        barName.css({top:self.scaleCof*16+'px','left':'15px', 'position':'absolute', 'color':'#fff', 'fontSize':16*self.scaleCof+'px'});
         barBlock.append(subBarNormalBlock);
         barBlock.append(subBarOverEatBlock);
         self.gameBlock.append(barBlock);
+        self.gameBlock.append(barName);
 
         setInterval(function(){
             var scaleWeight = self.weight*self.scaleCof;
