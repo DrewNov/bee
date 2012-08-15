@@ -36,7 +36,7 @@ var Apple = function(iteration)
     }
 
     this.animateApple = function (){
-        self.appleDom.css({"visibility": "visible",'-webkit-transition-duration': '4s','top':(curPosTop+self.scaleCof*260)+'px'});
+        self.appleDom.css({"visibility": "visible",'-webkit-transition-duration': '3s','top':(curPosTop+self.scaleCof*260)+'px'});
     }
 
     this.appleExpire = function(){
