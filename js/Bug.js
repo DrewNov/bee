@@ -51,6 +51,8 @@ var bug = function(setings)
 
     this.increaseLevel = function () {
         ++self.level;
+        ++self.life;
+        $('.life span').html(self.life);
         $('.level span').html(self.level);
         $('.nextLevel span').html(self.level);
         $('.nextLevel').bind('webkitTransitionEnd',function(){
@@ -59,7 +61,7 @@ var bug = function(setings)
         });
         $('.nextLevel').css({'opacity':1});
         self.toNextLevel = self.toNextLevel +self.level*5;
-        globalTime = 2000 - self.level*300;
+        globalTime = 2000 - self.level*200;
     }
 
     this.increaseEaten = function () {
@@ -75,6 +77,11 @@ var bug = function(setings)
         --self.life;
         $('.life span').html(self.life);
         if (self.life == 0) {
+            $('body').unbind("vmousedown");
+            $('a').bind("vmousedown",function(){
+                e.preventDefault();
+                console.log('1');
+            });
             self.gamePop.show('pop-end');
         }
     }

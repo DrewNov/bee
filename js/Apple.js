@@ -67,7 +67,7 @@ var Apple = function(iteration)
         }, 3000);// return apple to the tree
     }
     this.appleMeetBug = function(action,x, y) {
-        var msg = '+1 apple',
+        var msg = '+1 orange',
             color = 'green',
             showMsg;
         if (!action){
