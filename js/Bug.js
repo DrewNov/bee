@@ -85,7 +85,6 @@ var bug = function(setings)
                 return true;
 
             });
-
             self.gamePop.show('pop-end');
         }
     }

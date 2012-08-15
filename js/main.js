@@ -12,6 +12,11 @@ $(document).ready(function(){
         popDivStart;
     gameDOM.css({'height':height, 'width': 800*scaleCof});
     navDom.css({'height':height, 'width': ((width-800*scaleCof)/2)});
+
+    if (height>width)
+    {
+        alert('Please,rotate your device and refresh web-page');
+    }
     var objectBug = new bug({idGameBlock:'gameBug'});
 
     //----------for-testing--------
@@ -27,6 +32,8 @@ $(document).ready(function(){
             '-webkit-transform':'translate3d(0,0,0) scaleX(-1)'
         });
     }
+
+
     //----------mouse--------
     $('body').bind('touchmove',function(e){
         e.preventDefault();
