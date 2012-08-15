@@ -12,7 +12,8 @@ var Apple = function(iteration)
     this.timerOn = true;
 
     var self = this,
-        curPosTop;
+        curPosTop,
+        scaleForMove;
 
     this.init = function (){
         createApple();
@@ -32,11 +33,12 @@ var Apple = function(iteration)
         self.posXleft = parseInt(self.appleDom.css('left'));
         self.heightY = self.scaleCof*21;
         $('.game').append(self.appleDom);
+        scaleForMove = Math.round(curPosTop+self.scaleCof*260);
 
     }
 
     this.animateApple = function (){
-        self.appleDom.css({"visibility": "visible",'-webkit-transition-duration': '3s','top':(curPosTop+self.scaleCof*260)+'px'});
+        self.appleDom.css({"visibility": "visible",'-webkit-transition-duration': '4s','top':scaleForMove+'px'});
     }
 
     this.appleExpire = function(){
