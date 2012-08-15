@@ -13,7 +13,7 @@ $(document).ready(
 
     function(){
         // Initialize CSSClass Array
-        for (var i=0; i<30; i++)
+        for (var i=0; i<20; i++)
         {
             globalGeneratedApple.push(new Apple(i));
 
